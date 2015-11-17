@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tree string="Invoice Line Payment">
+    <field name="group"/>
+    <field name="date"/>
+    <field name="description"/>
+    <field name="amount"/>
+    <field name="line"/>
+    <field name="state"/>
+    <button name="done" string="Done" tree_invisible="1"/>
+    <button name="draft" string="Draft" tree_invisible="1"/>
+</tree>

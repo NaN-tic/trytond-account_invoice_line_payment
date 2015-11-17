@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tree string="Invoice Line Payment Group">
+    <field name="reference"/>
+    <field name="party"/>
+    <field name="kind"/>
+    <field name="move_line_amount"/>
+    <field name="state"/>
+    <field name="company"/>
+</tree>

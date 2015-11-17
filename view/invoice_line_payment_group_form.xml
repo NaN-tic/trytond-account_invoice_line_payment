@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<form string="Invoice Line Payment Group">
+    <label name="reference"/>
+    <field name="reference"/>
+    <label name="kind"/>
+    <field name="kind"/>
+    <label name="party"/>
+    <field name="party"/>
+    <label name="move_line"/>
+    <field name="move_line"/>
+    <label name="company"/>
+    <field name="company"/>
+    <label name="currency"/>
+    <field name="currency"/>
+    <field name="payments" colspan="4"/>
+    <group id="state_buttons" colspan="4">
+        <label name="state"/>
+        <field name="state"/>
+        <group id="buttons" colspan="2" col="4">
+            <button name="confirm" string="Confirm"/>
+            <button name="draft" string="Draft"/>
+            <button name="search_lines" string="Search Invoice Lines"/>
+            <button name="import_payments" string="Import Payments"/>
+        </group>
+    </group>
+</form>

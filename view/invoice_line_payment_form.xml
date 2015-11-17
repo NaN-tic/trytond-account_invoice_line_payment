@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<form string="Invoice Line Payment">
+    <label name="group"/>
+    <field name="group"/>
+    <newline/>
+    <label name="date"/>
+    <field name="date"/>
+    <label name="description"/>
+    <field name="description"/>
+    <label name="line"/>
+    <field name="line"/>
+    <label name="amount"/>
+    <field name="amount"/>
+    <label name="company"/>
+    <field name="company"/>
+    <label name="currency"/>
+    <field name="currency"/>
+    <label name="kind"/>
+    <field name="kind"/>
+    <label name="difference_move"/>
+    <field name="difference_move"/>
+    <group id="state_buttons" colspan="4">
+        <label name="state"/>
+        <field name="state"/>
+        <group id="buttons" colspan="2" col="4">
+            <button name="done" string="Done"/>
+            <button name="draft" string="Draft"/>
+            <button name="search_line" string="Search Invoice Line"/>
+            <button name="create_writeoff" string="Create WriteOff Move"/>
+        </group>
+    </group>
+    <field name="difference" invisible="1"/>
+</form>

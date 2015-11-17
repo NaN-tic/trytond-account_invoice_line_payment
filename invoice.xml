@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <record model="ir.ui.view" id="invoice_view_form">
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="account_invoice.invoice_view_form"/>
+            <field name="name">invoice_form</field>
+        </record>
+        <record model="ir.ui.view" id="invoice_line_view_form">
+            <field name="model">account.invoice.line</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="account_invoice.invoice_line_view_form"/>
+            <field name="name">invoice_line_form</field>
+        </record>
+        <record model="ir.ui.view" id="invoice_line_view_tree">
+            <field name="model">account.invoice.line</field>
+            <field name="type">tree</field>
+            <field name="inherit" ref="account_invoice.invoice_line_view_tree"/>
+            <field name="name">invoice_line_list</field>
+        </record>
+        <record model="ir.ui.view" id="invoice_line_view_tree_sequence">
+            <field name="model">account.invoice.line</field>
+            <field name="type">tree</field>
+            <field name="inherit"
+                ref="account_invoice.invoice_line_view_tree_sequence"/>
+            <field name="name">invoice_line_list</field>
+        </record>
+
+        <record model="ir.model.field.access"
+                id="model_field_access_payments_amount">
+            <field name="field"
+                search="[('model.model', '=', 'account.invoice.line'), ('name', '=', 'payment_amount')]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+        </record>
+        <record model="ir.model.field.access"
+                id="model_field_access_payments_amount_group_payments">
+            <field name="field"
+                search="[('model.model', '=', 'account.invoice.line'), ('name', '=', 'payment_amount')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+
+    </data>
+</tryton>

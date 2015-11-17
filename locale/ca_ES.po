@@ -1,0 +1,404 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:account.invoice.line.payment.group:"
+msgid ""
+"There can not be two Invoice Line Payment Groups with the same Move Line."
+msgstr ""
+"No hi pot haver dos Grups de pagament de línies de factura amb el mateix "
+"Apunt comptable."
+
+msgctxt "error:account.invoice.line.payment.group:"
+msgid ""
+"Total payments amount \"%s\" in payment group \"%s\" must match Move Line "
+"amount \"%s\"."
+msgstr ""
+"L'import total dels pagaments \"%s\" del grup de pagament \"%s\" ha de "
+"coincidir amb l'import \"%s\" del seu apunt comptable."
+
+msgctxt "error:account.invoice.line.payment:"
+msgid ""
+"Payment \"%(payment)s\" can not be mark as done as it has a difference of "
+"\"%(difference)s\" between it amount and its line amount."
+msgstr ""
+"El pagament \"%(payment)s\" no es pot marcar com a realitzat perquè hi ha "
+"una diferència de \"%(difference)s\" entre els seu import i l'import de les "
+"seves línies. "
+
+msgctxt "error:account.invoice.line.payment:"
+msgid "Payment \"%s\" must be in draft state before deletion."
+msgstr "El pagament \"%s\" ha d'estar en estat esborrany abans de ser esborrat."
+
+msgctxt "error:account.invoice.line.payment:"
+msgid "Payment \"%s\" must have an invoice line before it can be done."
+msgstr ""
+"El pagament \"%s\" ha de tenir una línia de factura abans de que es pugui "
+"realitzar."
+
+msgctxt "field:account.invoice,line_payments:"
+msgid "Line Payments"
+msgstr "Pagaments de la línia"
+
+msgctxt "field:account.invoice.line,payment_amount:"
+msgid "Payment Amount"
+msgstr "Import pendent"
+
+msgctxt "field:account.invoice.line,payments:"
+msgid "Payments"
+msgstr "Pagaments"
+
+msgctxt "field:account.invoice.line.payment,amount:"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "field:account.invoice.line.payment,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.invoice.line.payment,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:account.invoice.line.payment,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:account.invoice.line.payment,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.invoice.line.payment,currency_digits:"
+msgid "Currency Digits"
+msgstr "Dígits de la moneda"
+
+msgctxt "field:account.invoice.line.payment,date:"
+msgid "Date"
+msgstr "Data"
+
+msgctxt "field:account.invoice.line.payment,description:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "field:account.invoice.line.payment,difference:"
+msgid "Difference"
+msgstr "Diferència"
+
+msgctxt "field:account.invoice.line.payment,difference_move:"
+msgid "Diference Move"
+msgstr "Moviment diferencia"
+
+msgctxt "field:account.invoice.line.payment,group:"
+msgid "Group"
+msgstr "Grup"
+
+msgctxt "field:account.invoice.line.payment,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.invoice.line.payment,kind:"
+msgid "Kind"
+msgstr "Tipus"
+
+msgctxt "field:account.invoice.line.payment,line:"
+msgid "Line"
+msgstr "Línia"
+
+msgctxt "field:account.invoice.line.payment,party:"
+msgid "Party"
+msgstr "Tercer"
+
+msgctxt "field:account.invoice.line.payment,rec_name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:account.invoice.line.payment,state:"
+msgid "State"
+msgstr "Estat"
+
+msgctxt "field:account.invoice.line.payment,write_date:"
+msgid "Write Date"
+msgstr "Data modificación"
+
+msgctxt "field:account.invoice.line.payment,write_uid:"
+msgid "Write User"
+msgstr "Usuari modificació"
+
+msgctxt "field:account.invoice.line.payment.group,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.invoice.line.payment.group,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:account.invoice.line.payment.group,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:account.invoice.line.payment.group,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.invoice.line.payment.group,currency_digits:"
+msgid "Currency Digits"
+msgstr "Dígits de la moneda"
+
+msgctxt "field:account.invoice.line.payment.group,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.invoice.line.payment.group,kind:"
+msgid "Kind"
+msgstr "Tipus"
+
+msgctxt "field:account.invoice.line.payment.group,move_line:"
+msgid "Move Line"
+msgstr "Apunt"
+
+msgctxt "field:account.invoice.line.payment.group,move_line_amount:"
+msgid "Move Line Amount"
+msgstr "Import apunt"
+
+msgctxt "field:account.invoice.line.payment.group,party:"
+msgid "Party"
+msgstr "Tercer"
+
+msgctxt "field:account.invoice.line.payment.group,payments:"
+msgid "Payments"
+msgstr "Pagaments"
+
+msgctxt "field:account.invoice.line.payment.group,rec_name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:account.invoice.line.payment.group,reference:"
+msgid "Reference"
+msgstr "Referència"
+
+msgctxt "field:account.invoice.line.payment.group,state:"
+msgid "State"
+msgstr "Estat"
+
+msgctxt "field:account.invoice.line.payment.group,write_date:"
+msgid "Write Date"
+msgstr "Data modificación"
+
+msgctxt "field:account.invoice.line.payment.group,write_uid:"
+msgid "Write User"
+msgstr "Usuari modificació"
+
+msgctxt "field:account.invoice.line.payment.import.start,confirm:"
+msgid "Confirm group"
+msgstr "Confirmar el grup"
+
+msgctxt "field:account.invoice.line.payment.import.start,data:"
+msgid "File"
+msgstr "Fitxer"
+
+msgctxt "field:account.invoice.line.payment.import.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,amount:"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,currency_digits:"
+msgid "Currency Digits"
+msgstr "Dígits de la moneda"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,date:"
+msgid "Date"
+msgstr "Data"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,description:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:account.invoice.line.payment.write-off.start,journal:"
+msgid "Journal"
+msgstr "Diari"
+
+msgctxt "model:account.invoice.line.payment,name:"
+msgid "Invoice Line Payment"
+msgstr "Pagament de línia de factura"
+
+msgctxt "model:account.invoice.line.payment.group,name:"
+msgid "Invoice Line Payment Group"
+msgstr "Grup de pagament de línia de factura"
+
+msgctxt "model:account.invoice.line.payment.import.start,name:"
+msgid "Import Payments Start"
+msgstr "Inici importa Pagaments"
+
+msgctxt "model:account.invoice.line.payment.write-off.start,name:"
+msgid "Creat Write-Off Move"
+msgstr "Crear movimiento de desajuste"
+
+msgctxt "model:ir.action,name:act_payment"
+msgid "Invoice Line Payment"
+msgstr "Pagament de línia de factura"
+
+msgctxt "model:ir.action,name:act_payment_group"
+msgid "Invoice Line Payment Group"
+msgstr "Grup de pagament de línia de factura"
+
+msgctxt "model:ir.action,name:act_payment_party"
+msgid "Invoice Line Payment"
+msgstr "Pagaments de línia de factura"
+
+msgctxt "model:ir.action,name:wizard_import_payments"
+msgid "Import Payments"
+msgstr "Importa Pagaments"
+
+msgctxt "model:ir.action,name:wizard_writeoff"
+msgid "Create Write-Off Move"
+msgstr "Crear movimiento de desajuste"
+
+msgctxt "model:ir.action.act_window.domain,name:act_payment_domain_all"
+msgid "All"
+msgstr "Tots"
+
+msgctxt "model:ir.action.act_window.domain,name:act_payment_domain_draft"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "model:ir.action.act_window.domain,name:act_payment_group_domain_all"
+msgid "All"
+msgstr "Tots"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_payment_group_domain_confirmed"
+msgid "Confimred"
+msgstr "Confirmat"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_payment_group_domain_draft"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "model:ir.action.act_window.domain,name:act_payment_party_domain_all"
+msgid "All"
+msgstr "Tots"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_payment_party_domain_draft"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "model:ir.ui.menu,name:menu_invoice_line_payment"
+msgid "Invoice Line Payments"
+msgstr "Pagaments de línia de factura"
+
+msgctxt "model:ir.ui.menu,name:menu_invoice_line_payment_group"
+msgid "Invoice Line Payment Groups"
+msgstr "Grups de pagament de línia de factura"
+
+msgctxt "model:res.group,name:group_account_invoice_line_payment"
+msgid "Account Invoice Line Payment"
+msgstr "Pagament de línia de factures"
+
+msgctxt "selection:account.invoice.line.payment,kind:"
+msgid "Customer"
+msgstr "Client"
+
+msgctxt "selection:account.invoice.line.payment,kind:"
+msgid "Supplier"
+msgstr "Proveïdor"
+
+msgctxt "selection:account.invoice.line.payment,state:"
+msgid "Done"
+msgstr "Realitzat"
+
+msgctxt "selection:account.invoice.line.payment,state:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "selection:account.invoice.line.payment.group,kind:"
+msgid "Customer"
+msgstr "Client"
+
+msgctxt "selection:account.invoice.line.payment.group,kind:"
+msgid "Supplier"
+msgstr "Proveïdor"
+
+msgctxt "selection:account.invoice.line.payment.group,state:"
+msgid "Confirmed"
+msgstr "Confirmat"
+
+msgctxt "selection:account.invoice.line.payment.group,state:"
+msgid "Done"
+msgstr "Realitzat"
+
+msgctxt "selection:account.invoice.line.payment.group,state:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "view:account.invoice.line.payment.group:"
+msgid "Confirm"
+msgstr "Confirma"
+
+msgctxt "view:account.invoice.line.payment.group:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "view:account.invoice.line.payment.group:"
+msgid "Import Payments"
+msgstr "Importa Pagaments"
+
+msgctxt "view:account.invoice.line.payment.group:"
+msgid "Invoice Line Payment Group"
+msgstr "Grup de pagament de línia de factura"
+
+msgctxt "view:account.invoice.line.payment.group:"
+msgid "Search Invoice Lines"
+msgstr "Cerca linies de factura"
+
+msgctxt "view:account.invoice.line.payment.import.start:"
+msgid "Import Payments"
+msgstr "Importa Pagaments"
+
+msgctxt "view:account.invoice.line.payment.write-off.start:"
+msgid "Write-Off"
+msgstr "Desajust"
+
+msgctxt "view:account.invoice.line.payment:"
+msgid "Create WriteOff Move"
+msgstr "Crear movimiento de desajuste"
+
+msgctxt "view:account.invoice.line.payment:"
+msgid "Done"
+msgstr "Realitzat"
+
+msgctxt "view:account.invoice.line.payment:"
+msgid "Draft"
+msgstr "Esborrany"
+
+msgctxt "view:account.invoice.line.payment:"
+msgid "Invoice Line Payment"
+msgstr "Pagament de línia de factura"
+
+msgctxt "view:account.invoice.line.payment:"
+msgid "Search Invoice Line"
+msgstr "Cerca línia de factura"
+
+msgctxt "wizard_button:account.invoice.line.payment.import,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgctxt "wizard_button:account.invoice.line.payment.import,start,import_:"
+msgid "Import"
+msgstr "Importa"
+
+msgctxt "wizard_button:account.invoice.line.payment.write-off,start,create_:"
+msgid "Create"
+msgstr "Crea"
+
+msgctxt "wizard_button:account.invoice.line.payment.write-off,start,end:"
+msgid "Cancel"
+msgstr "Cancel·la"

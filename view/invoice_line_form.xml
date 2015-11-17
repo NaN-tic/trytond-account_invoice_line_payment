@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/notebook" position="inside">
+        <page name="payments" col="2">
+            <label name="payment_amount"/>
+            <field name="payment_amount"/>
+            <field name="payments" colspan="2"/>
+        </page>
+    </xpath>
+</data>
