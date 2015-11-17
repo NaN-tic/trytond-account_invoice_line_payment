@@ -286,13 +286,13 @@ class Payment(Workflow, ModelSQL, ModelView):
                 ),
             ('invoice.party', '=', Eval('party')),
             ('invoice.currency', '=', Eval('currency')),
-            If(Eval('state') == 'draft',
-                (('payment_amount', '!=', 0),),
-                ()
-                ),
             ],
     # This domain breaks when moving a paiment from done to draft with a paid
     # invoice.
+    #        If(Eval('state') == 'draft',
+    #            (('payment_amount', '!=', 0),),
+    #            ()
+    #            ),
     #        If(Eval('state') == 'draft',
     #            [
     #                ('invoice.state', '=', 'posted'),
