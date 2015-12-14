@@ -160,7 +160,7 @@ class InvoiceLine:
 
                 # SQLite uses float for SUM
                 if not isinstance(amount, Decimal):
-                    amount = Decimal(amount)
+                    amount = Decimal(amount or 0)
                 amounts[line_id] = currency.round(amount)
         return amounts
 
