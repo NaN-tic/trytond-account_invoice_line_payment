@@ -39,7 +39,9 @@ class Invoice:
         return result
 
     def get_reconciled(self, name):
-        if all(l.paid for l in self.lines):
+        lines_to_pay = [l for l in self.lines if l.type == 'line' and
+            l.amount != Decimal('0.0')]
+        if lines_to_pay and all(l.paid for l in lines_to_pay):
             return True
         return super(Invoice, self).get_reconciled(name)
 
