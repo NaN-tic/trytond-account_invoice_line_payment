@@ -43,7 +43,7 @@
                 id="act_payment_domain_draft">
             <field name="name">Draft</field>
             <field name="sequence" eval="10"/>
-            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="domain" eval="[('state', '=', 'draft')]" pyson="1"/>
             <field name="act_window" ref="act_payment"/>
         </record>
         <record model="ir.action.act_window.domain" id="act_payment_domain_all">
@@ -102,14 +102,15 @@
                 id="act_payment_group_domain_draft">
             <field name="name">Draft</field>
             <field name="sequence" eval="10"/>
-            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="domain" eval="[('state', '=', 'draft')]" pyson="1"/>
             <field name="act_window" ref="act_payment_group"/>
         </record>
         <record model="ir.action.act_window.domain"
                 id="act_payment_group_domain_confirmed">
             <field name="name">Confirmed</field>
             <field name="sequence" eval="20"/>
-            <field name="domain">[('state', '=', 'confirmed')]</field>
+            <field name="domain" eval="[('state', '=', 'confirmed')]"
+                pyson="1"/>
             <field name="act_window" ref="act_payment_group"/>
         </record>
         <record model="ir.action.act_window.domain"
@@ -144,7 +145,10 @@
           </record>
 
           <record model="ir.rule" id="rule_account_invoice_line_payment1">
-            <field name="domain">[('company', '=', user.company.id if user.company else None)]</field>
+
+            <field name="domain"
+                eval="[('company', '=', Eval('user', {}).get('company', None))]"
+                pyson="1"/>
             <field name="rule_group" ref="rule_group_account_invoice_line_payment"/>
           </record>
 
@@ -156,7 +160,9 @@
           </record>
 
           <record model="ir.rule" id="rule_account_invoice_line_payment_group1">
-            <field name="domain">[('company', '=', user.company.id if user.company else None)]</field>
+            <field name="domain"
+                eval="[('company', '=', Eval('user', {}).get('company', None))]"
+                pyson="1"/>
             <field name="rule_group" ref="rule_group_account_invoice_line_payment_group"/>
           </record>
 
@@ -181,13 +187,14 @@
         <record model="ir.action.act_window" id="act_payment_party">
             <field name="name">Invoice Line Payment</field>
             <field name="res_model">account.invoice.line.payment</field>
-            <field name="domain">[('party', 'in', Eval('active_ids'))]</field>
+            <field name="domain" eval="[('party', 'in', Eval('active_ids'))]"
+                pyson="1"/>
         </record>
         <record model="ir.action.act_window.domain"
                 id="act_payment_party_domain_draft">
             <field name="name">Draft</field>
             <field name="sequence" eval="10"/>
-            <field name="domain">[('state', '=', 'draft')]</field>
+            <field name="domain" eval="[('state', '=', 'draft')]" pyson="1"/>
             <field name="act_window" ref="act_payment_party"/>
         </record>
         <record model="ir.action.act_window.domain"
