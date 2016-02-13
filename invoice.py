@@ -72,21 +72,11 @@ class InvoiceLine:
 
     @property
     def tax_amount(self):
-        pool = Pool()
-        Tax = pool.get('account.tax')
         tax_amount = Decimal(0)
-        if self.type != 'line' or not self.invoice:
+        if self.type != 'line':
             return tax_amount
-        context = self.invoice.get_tax_context()
-        with Transaction().set_context(**context):
-            taxes = Tax.compute(Tax.browse(self.taxes),
-                self.unit_price, self.quantity)
-        for tax in taxes:
-            if self.invoice.type in ('out_invoice', 'in_invoice'):
-                amount = tax['amount'] * tax['tax'].invoice_base_sign
-            else:
-                amount = tax['amount'] * tax['tax'].credit_note_base_sign
-            tax_amount += amount
+        for tax in self._get_taxes().values():
+            tax_amount += tax['amount'] * tax['tax_sign']
         return tax_amount
 
     @classmethod

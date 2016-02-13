@@ -10,7 +10,7 @@ from decimal import Decimal
 from itertools import chain
 from sql.functions import Abs
 
-from trytond.model import Workflow, ModelView, ModelSQL, fields
+from trytond.model import Workflow, ModelView, ModelSQL, fields, Unique
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval, If, Bool
 from trytond.transaction import Transaction
@@ -115,8 +115,9 @@ class Group(Workflow, ModelSQL, ModelView):
                     'icon': 'tryton-executable',
                     },
                 })
+        t = cls.__table__()
         cls._sql_constraints += [
-            ('move_line_uniq', 'UNIQUE(move_line)', 'There can not be two '
+            ('move_line_uniq', Unique(t, t.move_line), 'There can not be two '
                 'Invoice Line Payment Groups with the same Move Line.'),
             ]
 
@@ -410,15 +411,11 @@ class Payment(Workflow, ModelSQL, ModelView):
 
     @fields.depends('kind')
     def on_change_kind(self):
-        return {
-            'line': None,
-            }
+        self.line = None
 
     @fields.depends('party')
     def on_change_party(self):
-        return {
-            'line': None,
-            }
+        self.line = None
 
     @classmethod
     def process_invoices(cls, payments):
