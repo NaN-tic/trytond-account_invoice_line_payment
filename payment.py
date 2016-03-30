@@ -583,9 +583,22 @@ class ImportPayments(Wizard):
             ])
     import_ = StateTransition()
 
+    @classmethod
+    def __setup__(cls):
+        super(ImportPayments, cls).__setup__()
+        cls._error_messages.update({
+                'values_not_correct': ('Line need 3 values and it has '
+                    '%(values)s\n\n[%(line)s]'),
+                })
+
     def get_payment(self, row):
         pool = Pool()
         Payment = pool.get('account.invoice.line.payment')
+        if len(row) != 3:
+            self.raise_user_error('values_not_correct', {
+                    'values': len(row),
+                    'line': row,
+                    })
         date, amount, description = row
         payment = Payment()
         date_args = map(int, date.split('/'))

@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -16,6 +16,16 @@ msgid ""
 msgstr ""
 "L'import total dels pagaments \"%s\" del grup de pagament \"%s\" ha de "
 "coincidir amb l'import \"%s\" del seu apunt comptable."
+
+msgctxt "error:account.invoice.line.payment.import:"
+msgid ""
+"Line need 3 values and it has %(values)s\n"
+"\n"
+"[%(line)s]"
+msgstr ""
+"La línia necessita 3 valors i se li estan passant %(values)s\n"
+"\n"
+"%(line)s"
 
 msgctxt "error:account.invoice.line.payment:"
 msgid ""
@@ -274,7 +284,7 @@ msgstr "Tots"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_payment_group_domain_confirmed"
-msgid "Confimred"
+msgid "Confirmed"
 msgstr "Confirmat"
 
 msgctxt ""
