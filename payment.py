@@ -1,9 +1,6 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
+from io import BytesIO
 import csv
 import datetime
 from decimal import Decimal
@@ -597,7 +594,7 @@ class ImportPayments(Wizard):
         Group = pool.get('account.invoice.line.payment.group')
         group = Group(Transaction().context['active_id'])
         dialect = csv.Sniffer().sniff(str(self.start.data[:1024]))
-        reader = csv.reader(StringIO.StringIO(str(self.start.data)),
+        reader = csv.reader(BytesIO(str(self.start.data)),
             dialect=dialect)
         reader.next()  # Skip header line
         payments = []
