@@ -93,11 +93,9 @@ class InvoiceLine:
         invoice = Invoice.__table__()
 
         # TODO: Sum amount taxes
-        invoice_type = Coalesce(Coalesce(table.invoice_type, invoice.type),
-            'out_invoice')
-        tax_type = Substring(invoice_type, Position(',', invoice_type)
-            + Literal(1))
-        tax_sign = Coalesce(Case((tax_type == 'invoice', tax.invoice_tax_sign),
+        amount = Cast(Coalesce(table.quantity, 0.0) *
+            Coalesce(table.unit_price, 0.0), cls.unit_price.sql_type().base)
+        tax_sign = Coalesce(Case((amount >= 0, tax.invoice_tax_sign),
                 else_=tax.credit_note_tax_sign), Literal(1))
         taxes_subquery = line_tax.select(line_tax.tax,
             where=(line_tax.line == table.id))
@@ -105,8 +103,7 @@ class InvoiceLine:
             where=(tax.id.in_(taxes_subquery) | tax.parent.in_(taxes_subquery))
                 & (tax.type == 'percentage'))
         payment_amount = Sum(Coalesce(payment.amount, 0))
-        line_amount = (Cast(table.quantity * table.unit_price,
-                cls.unit_price.sql_type().base) * tax_rate)
+        line_amount = amount * tax_rate
         main_amount = line_amount - payment_amount
         return {
             'invoice_line': table,
@@ -127,7 +124,7 @@ class InvoiceLine:
 #            if line.invoice:
 #                currency = line.invoice.currency
 #            amounts[line.id] = currency.round(amount)
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
         tables, main_amount = cls._compute_payment_amount_query()
         table = tables['invoice_line']
         invoice = tables['invoice']
@@ -142,7 +139,6 @@ class InvoiceLine:
                 ).select(table.id, main_amount,
                     where=reduce_ids(table.id, ids2line.keys()),
                     group_by=(table.id, invoice.type))
-
             cursor.execute(*query)
             for line_id, amount in cursor.fetchall():
                 line = ids2line[line_id]
