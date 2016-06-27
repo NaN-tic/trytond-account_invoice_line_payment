@@ -262,15 +262,9 @@ class Payment(Workflow, ModelSQL, ModelView):
     'Invoice Line Payment'
     __name__ = 'account.invoice.line.payment'
     company = fields.Function(fields.Many2One('company.company', 'Company'),
-        'get_group_field', searcher='search_group_field')
-    party = fields.Function(fields.Many2One('party.party', 'Party'),
-        'get_group_field', searcher='search_group_field')
-    currency = fields.Function(fields.Many2One('currency.currency',
-            'Currency'), 'on_change_with_currency')
+        'on_change_with_company', searcher='search_group_field')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
-    kind = fields.Function(fields.Selection(KINDS, 'Kind'), 'get_group_field',
-        searcher='search_group_field')
     date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
     amount = fields.Numeric('Amount', required=True,
         digits=(16, Eval('currency_digits', 2)), states=_STATES,
@@ -278,12 +272,13 @@ class Payment(Workflow, ModelSQL, ModelView):
     line = fields.Many2One('account.invoice.line', 'Line', ondelete='RESTRICT',
         domain=[
             ('type', '=', 'line'),
-            If(Eval('kind') == 'customer',
-                ('invoice.type', 'in', ['out_invoice', 'out_credit_note']),
-                ('invoice.type', 'in', ['in_invoice', 'in_credit_note']),
+            If(Eval('_parent_group', {}).get('kind', '') == 'customer',
+                ('invoice.type', '=', 'out'),
+                ('invoice.type', '=', 'in'),
                 ),
-            ('invoice.party', '=', Eval('party')),
-            ('invoice.currency', '=', Eval('currency')),
+            ('invoice.party', '=', Eval('_parent_group', {}).get('party', -1)),
+            ('invoice.currency', '=',
+                Eval('_parent_group', {}).get('currency', -1)),
             ],
     # This domain breaks when moving a paiment from done to draft with a paid
     # invoice.
@@ -300,17 +295,10 @@ class Payment(Workflow, ModelSQL, ModelView):
             'readonly': Eval('state') != 'draft',
             'required': Eval('state') == 'done',
             },
-        depends=['state', 'party', 'currency', 'kind'])
+        depends=['state', 'group'])
     description = fields.Char('Description', states=_STATES, depends=_DEPENDS)
     group = fields.Many2One('account.invoice.line.payment.group', 'Group',
-        readonly=True, required=True, ondelete='CASCADE',
-        states={
-            'required': Eval('state').in_(['processing', 'succeeded']),
-            },
-        domain=[
-            ('company', '=', Eval('company', -1)),
-            ],
-        depends=['state', 'company'])
+        readonly=True, required=True, ondelete='CASCADE')
     difference = fields.Function(fields.Numeric('Difference',
             digits=(16, Eval('currency_digits', 2)),
             depends=['currency_digits']),
@@ -377,6 +365,7 @@ class Payment(Workflow, ModelSQL, ModelView):
     def default_state():
         return 'draft'
 
+    @fields.depends('group')
     def get_group_field(self, name):
         value = getattr(self.group, name)
         if isinstance(value, ModelSQL):
@@ -385,34 +374,26 @@ class Payment(Workflow, ModelSQL, ModelView):
 
     @fields.depends('line', 'amount', methods=['currency_digits'])
     def on_change_with_difference(self, name=None):
-        if not self.line:
+        if not self.line or not self.amount:
             return Decimal(0)
         digits = self.on_change_with_currency_digits()
         amount = (self.line.amount + self.line.tax_amount) - self.amount
         return amount.quantize(Decimal(str(10 ** -digits)))
+
+    @fields.depends('group', 'company')
+    def on_change_with_company(self, name=None):
+        if self.group:
+            return self.group.company.id
 
     @classmethod
     def search_group_field(cls, name, clause):
         return [('group.%s' % clause[0],) + tuple(clause[1:])]
 
     @fields.depends('group')
-    def on_change_with_currency(self, name=None):
-        if self.group:
-            return self.group.currency.id
-
-    @fields.depends('group')
     def on_change_with_currency_digits(self, name=None):
         if self.group:
             return self.group.currency.digits
         return 2
-
-    @fields.depends('kind')
-    def on_change_kind(self):
-        self.line = None
-
-    @fields.depends('party')
-    def on_change_party(self):
-        self.line = None
 
     @classmethod
     def process_invoices(cls, payments):
@@ -514,7 +495,7 @@ class Payment(Workflow, ModelSQL, ModelView):
     def _invoice_line_search_domain(self):
         return [
             ('invoice.party', '=', self.group.party.id),
-            ('invoice.currency', '=', self.currency.id),
+            ('invoice.currency', '=', self.group.currency.id),
             ('invoice.state', '=', 'posted'),
             ('payment_amount', '=', self.amount),
             ]
