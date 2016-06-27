@@ -15,10 +15,6 @@
     <field name="amount"/>
     <label name="company"/>
     <field name="company"/>
-    <label name="currency"/>
-    <field name="currency"/>
-    <label name="kind"/>
-    <field name="kind"/>
     <label name="difference_move"/>
     <field name="difference_move"/>
     <group id="state_buttons" colspan="4">
