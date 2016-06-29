@@ -39,8 +39,11 @@ class Invoice:
         return result
 
     def get_reconciled(self, name):
-        lines_to_pay = [l for l in self.lines if l.type == 'line' and
-            l.amount != Decimal('0.0')]
+        pool = Pool()
+        InvoiceLine = pool.get('account.invoice.line')
+        lines_to_pay = InvoiceLine.search([
+            ('invoice', '=', self.id),
+            ('type', '=', 'line')])
         if lines_to_pay and all(l.paid for l in lines_to_pay):
             return True
         return super(Invoice, self).get_reconciled(name)
@@ -103,20 +106,23 @@ class InvoiceLine:
         invoice = Invoice.__table__()
 
         # TODO: Sum amount taxes
-        invoice_type = Coalesce(Coalesce(table.invoice_type, invoice.type),
-            'out_invoice')
-        tax_type = Substring(invoice_type, Position(',', invoice_type)
-            + Literal(1))
-        tax_sign = Coalesce(Case((tax_type == 'invoice', tax.invoice_tax_sign),
-                else_=tax.credit_note_tax_sign), Literal(1))
-        taxes_subquery = line_tax.select(line_tax.tax,
-            where=(line_tax.line == table.id))
-        tax_rate = tax.select(Literal(1) + Sum(tax.rate * tax_sign),
-            where=(tax.id.in_(taxes_subquery) | tax.parent.in_(taxes_subquery))
-                & (tax.type == 'percentage'))
+        # TODO: Take care abaout taxes.
+        # invoice_type = Coalesce(Coalesce(table.invoice_type, invoice.type),
+            # 'out_invoice')
+        # tax_type = Substring(invoice_type, Position(',', invoice_type)
+            # + Literal(1))
+        # tax_sign = Coalesce(Case((tax_type == 'invoice', tax.invoice_tax_sign),
+        #         else_=tax.credit_note_tax_sign), Literal(1))
+        # taxes_subquery = line_tax.select(line_tax.tax,
+        #     where=(line_tax.line == table.id))
+        # tax_rate = tax.select(Literal(1) + Sum(tax.rate * tax_sign),
+        #     where=(tax.id.in_(taxes_subquery) | tax.parent.in_(taxes_subquery))
+        #         & (tax.type == 'percentage'))
         payment_amount = Sum(Coalesce(payment.amount, 0))
+        # line_amount = (Cast(table.quantity * table.unit_price,
+        #         cls.unit_price.sql_type().base) * tax_rate)
         line_amount = (Cast(table.quantity * table.unit_price,
-                cls.unit_price.sql_type().base) * tax_rate)
+            cls.unit_price.sql_type().base))
         main_amount = line_amount - payment_amount
         return {
             'invoice_line': table,
