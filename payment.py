@@ -578,9 +578,10 @@ class ImportPayments(Wizard):
         Group = pool.get('account.invoice.line.payment.group')
         group = Group(Transaction().context['active_id'])
         dialect = csv.Sniffer().sniff(str(self.start.data[:1024]))
-        reader = csv.reader(BytesIO(str(self.start.data)),
-            dialect=dialect)
+        data = StringIO.StringIO(str(self.start.data))
+        reader = csv.reader(data, dialect=dialect)
         reader.next()  # Skip header line
+        data.close()
         payments = []
         for row in reader:
             payments.append(self.get_payment(row))
