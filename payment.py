@@ -3,7 +3,7 @@
 try:
     import cStringIO as StringIO
 except ImportError:
-    import StringIO
+    from io import StringIO
 import csv
 import datetime
 from decimal import Decimal
