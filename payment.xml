@@ -183,7 +183,7 @@
         <record model="ir.action.act_window" id="act_payment_party">
             <field name="name">Invoice Line Payment</field>
             <field name="res_model">account.invoice.line.payment</field>
-            <field name="domain" eval="[('party', 'in', Eval('active_ids'))]"
+            <field name="domain" eval="[('line.invoice.party', 'in', Eval('active_ids'))]"
                 pyson="1"/>
         </record>
         <record model="ir.action.act_window.domain"

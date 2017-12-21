@@ -38,7 +38,7 @@ minor_version = int(minor_version)
 
 requires = []
 for dep in info.get('depends', []):
-    if not re.match(r'(ir|res|webdav)(\W|$)', dep):
+    if not re.match(r'(ir|res)(\W|$)', dep):
         prefix = MODULE2PREFIX.get(dep, 'trytond')
         requires.append('%s_%s >= %s.%s, < %s.%s' %
                 (prefix, dep, major_version, minor_version,
@@ -96,4 +96,8 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     test_suite='tests',
     test_loader='trytond.test_loader:Loader',
     tests_require=tests_require,
+    use_2to3=True,
+    convert_2to3_doctests=[
+        'tests/scenario_account_invoice_line_payment.rst',
+        ],
     )

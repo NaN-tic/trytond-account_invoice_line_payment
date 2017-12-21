@@ -147,7 +147,7 @@ class Group(Workflow, ModelSQL, ModelView):
 
     @fields.depends('currency')
     def on_change_with_currency_digits(self, name=None):
-        if self:
+        if self.currency:
             return self.currency.digits
         return 2
 
@@ -283,17 +283,17 @@ class Payment(Workflow, ModelSQL, ModelView):
             ('invoice.currency', '=',
                 Eval('_parent_group', {}).get('currency', -1)),
             ],
-    # This domain breaks when moving a paiment from done to draft with a paid
-    # invoice.
-    #        If(Eval('state') == 'draft',
-    #            (('payment_amount', '!=', 0),),
-    #            ()
-    #            ),
-    #        If(Eval('state') == 'draft',
-    #            [
-    #                ('invoice.state', '=', 'posted'),
-    #                ],
-    #            []),
+        # This domain breaks when moving a paiment from done to draft with a
+        # paid invoice.
+        #     If(Eval('state') == 'draft',
+        #         (('payment_amount', '!=', 0),),
+        #         ()
+        #         ),
+        #     If(Eval('state') == 'draft',
+        #         [
+        #             ('invoice.state', '=', 'posted'),
+        #             ],
+        #         []),
         states={
             'readonly': Eval('state') != 'draft',
             'required': Eval('state') == 'done',
@@ -555,7 +555,7 @@ class ImportPayments(Wizard):
     'Import Payments'
     __name__ = 'account.invoice.line.payment.import'
     start = StateView('account.invoice.line.payment.import.start',
-        'account.open_journal_ask_view_form', [
+        'account_invoice_line_payment.import_payments_start_view_form', [
             Button('Cancel', 'end', 'tryton-cancel'),
             Button('Import', 'import_', 'tryton-ok', default=True),
             ])
@@ -593,7 +593,7 @@ class ImportPayments(Wizard):
 
 
 class CreateWriteOffMoveStart(ModelView):
-    'Creat Write-Off Move'
+    'Create Write-Off Move'
     __name__ = 'account.invoice.line.payment.write-off.start'
     journal = fields.Many2One('account.journal', 'Journal', required=True,
         domain=[
@@ -607,7 +607,7 @@ class CreateWriteOffMoveStart(ModelView):
 
 
 class CreateWriteOffMove(Wizard):
-    'Creat Write-Off Move'
+    'Create Write-Off Move'
     __name__ = 'account.invoice.line.payment.write-off'
     start = StateView('account.invoice.line.payment.write-off.start',
         'account_invoice_line_payment.writeoff_start_view_form', [

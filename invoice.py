@@ -4,7 +4,6 @@ from decimal import Decimal
 from sql import Cast, Literal
 from sql.aggregate import Sum
 from sql.conditionals import Coalesce, Case
-from sql.functions import Substring, Position
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Bool, Eval
@@ -19,7 +18,7 @@ class Invoice:
     __name__ = 'account.invoice'
 
     line_payments = fields.Function(fields.One2Many(
-            'account.invoice.line.payment', 'line',  'Line Payments',
+            'account.invoice.line.payment', 'line', 'Line Payments',
             states={
                 'invisible': ~Bool(Eval('line_payments')),
                 }),
