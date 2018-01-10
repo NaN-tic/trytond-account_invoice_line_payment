@@ -11,11 +11,11 @@ from trytond.tools import grouped_slice, reduce_ids
 from trytond.transaction import Transaction
 
 __all__ = ['Invoice', 'InvoiceLine']
-__metaclass__ = PoolMeta
 
 
 class Invoice:
     __name__ = 'account.invoice'
+    __metaclass__ = PoolMeta
 
     line_payments = fields.Function(fields.One2Many(
             'account.invoice.line.payment', 'line', 'Line Payments',
@@ -50,6 +50,7 @@ class Invoice:
 
 class InvoiceLine:
     __name__ = 'account.invoice.line'
+    __metaclass__ = PoolMeta
 
     payment_amount = fields.Function(fields.Numeric('Payment Amount',
             digits=(16, Eval('currency_digits', 2)),
