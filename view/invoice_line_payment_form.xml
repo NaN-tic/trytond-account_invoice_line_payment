@@ -21,10 +21,10 @@
         <label name="state"/>
         <field name="state"/>
         <group id="buttons" colspan="2" col="4">
-            <button name="done" string="Done"/>
-            <button name="draft" string="Draft"/>
-            <button name="search_line" string="Search Invoice Line"/>
-            <button name="create_writeoff" string="Create WriteOff Move"/>
+            <button name="done"/>
+            <button name="draft"/>
+            <button name="search_line"/>
+            <button name="create_writeoff"/>
         </group>
     </group>
     <field name="difference" invisible="1"/>

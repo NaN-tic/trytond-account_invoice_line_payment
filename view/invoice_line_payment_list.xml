@@ -8,6 +8,6 @@
     <field name="amount"/>
     <field name="line"/>
     <field name="state"/>
-    <button name="done" string="Done" tree_invisible="1"/>
-    <button name="draft" string="Draft" tree_invisible="1"/>
+    <button name="done" tree_invisible="1"/>
+    <button name="draft" tree_invisible="1"/>
 </tree>

@@ -19,10 +19,10 @@
         <label name="state"/>
         <field name="state"/>
         <group id="buttons" colspan="2" col="4">
-            <button name="confirm" string="Confirm"/>
-            <button name="draft" string="Draft"/>
-            <button name="search_lines" string="Search Invoice Lines"/>
-            <button name="import_payments" string="Import Payments"/>
+            <button name="confirm"/>
+            <button name="draft"/>
+            <button name="search_lines"/>
+            <button name="import_payments"/>
         </group>
     </group>
 </form>
