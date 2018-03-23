@@ -266,6 +266,10 @@ class Payment(Workflow, ModelSQL, ModelView):
     __name__ = 'account.invoice.line.payment'
     company = fields.Function(fields.Many2One('company.company', 'Company'),
         'on_change_with_company', searcher='search_group_field')
+    party = fields.Function(fields.Many2One('party.party', 'Party'),
+        'get_group_field', searcher='search_group_field')
+    kind = fields.Function(fields.Selection(KINDS, 'Kind'), 'get_group_field',
+        searcher='search_group_field')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
     date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
