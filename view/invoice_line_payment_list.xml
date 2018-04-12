@@ -3,7 +3,7 @@
      copyright notices and license terms. -->
 <tree>
     <field name="group"/>
-    <field name="date"/>
+    <field name="date" widget="date"/>
     <field name="description"/>
     <field name="amount"/>
     <field name="line"/>
