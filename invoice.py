@@ -76,7 +76,7 @@ class InvoiceLine:
         if self.type != 'line':
             return tax_amount
         for tax in self._get_taxes().values():
-            tax_amount += tax['amount'] * tax['tax_sign']
+            tax_amount += tax['amount']
         return tax_amount
 
     @classmethod
@@ -95,11 +95,9 @@ class InvoiceLine:
         # TODO: Sum amount taxes
         amount = Cast(Coalesce(table.quantity, 0.0) *
             Coalesce(table.unit_price, 0.0), cls.unit_price.sql_type().base)
-        tax_sign = Coalesce(Case((amount >= 0, tax.invoice_tax_sign),
-                else_=tax.credit_note_tax_sign), Literal(1))
         taxes_subquery = line_tax.select(line_tax.tax,
             where=(line_tax.line == table.id))
-        tax_rate = tax.select(Literal(1) + Sum(tax.rate * tax_sign),
+        tax_rate = tax.select(Literal(1) + Sum(tax.rate),
             where=(tax.id.in_(taxes_subquery) | tax.parent.in_(taxes_subquery))
                 & (tax.type == 'percentage'))
         payment_amount = Sum(Coalesce(payment.amount, 0))
