@@ -379,7 +379,8 @@ class Payment(Workflow, ModelSQL, ModelView):
             return value.id
         return value
 
-    @fields.depends('line', 'amount', methods=['currency_digits'])
+    @fields.depends('line', 'amount',
+        methods=['on_change_with_currency_digits'])
     def on_change_with_difference(self, name=None):
         if not self.line or not self.amount:
             return Decimal(0)
