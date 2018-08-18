@@ -3,7 +3,7 @@
 from decimal import Decimal
 from sql import Cast, Literal
 from sql.aggregate import Sum
-from sql.conditionals import Coalesce, Case
+from sql.conditionals import Coalesce
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Bool, Eval
@@ -13,9 +13,8 @@ from trytond.transaction import Transaction
 __all__ = ['Invoice', 'InvoiceLine']
 
 
-class Invoice:
+class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
-    __metaclass__ = PoolMeta
 
     line_payments = fields.Function(fields.One2Many(
             'account.invoice.line.payment', 'line', 'Line Payments',
@@ -48,9 +47,8 @@ class Invoice:
         return list(set(p.id for l in self.lines for p in l.payments))
 
 
-class InvoiceLine:
+class InvoiceLine(metaclass=PoolMeta):
     __name__ = 'account.invoice.line'
-    __metaclass__ = PoolMeta
 
     payment_amount = fields.Function(fields.Numeric('Payment Amount',
             digits=(16, Eval('currency_digits', 2)),

@@ -119,7 +119,7 @@ Create invoice::
     >>> invoice.click('post')
     >>> invoice.reload()
     >>> invoice.state
-    u'posted'
+    'posted'
     >>> first_line, second_line = invoice.lines
     >>> first_line.payment_amount
     Decimal('220.00')
@@ -171,7 +171,7 @@ Create a payment for the first line::
     >>> payment.click('done')
     >>> group.reload()
     >>> group.state
-    u'done'
+    'done'
     >>> second_line.reload()
     >>> second_line.payment_amount
     Decimal('0.00')
@@ -223,7 +223,7 @@ Create a payment group for the remaining line::
     >>> second_payment.click('done')
     >>> group.reload()
     >>> group.state
-    u'done'
+    'done'
 
 
 Check that the invoice is reconciled::
@@ -234,7 +234,7 @@ Check that the invoice is reconciled::
     >>> invoice.reconciled
     True
     >>> invoice.state
-    u'paid'
+    'paid'
 
 Create invoice to be partialy reconciled::
 
@@ -254,7 +254,7 @@ Create invoice to be partialy reconciled::
     >>> invoice.click('post')
     >>> invoice.reload()
     >>> invoice.state
-    u'posted'
+    'posted'
     >>> first_line, = invoice.lines
 
 Create a Move for the reconciling the first line::
@@ -305,7 +305,7 @@ Create a payment group for reconciling with write-off::
     >>> writeoff.execute('create_')
     >>> group.reload()
     >>> group.state
-    u'done'
+    'done'
 
 Check that the invoice is reconciled::
 
@@ -313,4 +313,4 @@ Check that the invoice is reconciled::
     >>> invoice.reconciled
     True
     >>> invoice.state
-    u'paid'
+    'paid'

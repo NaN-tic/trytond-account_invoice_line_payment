@@ -1,7 +1,7 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 try:
-    import cStringIO as StringIO
+    import io as StringIO
 except ImportError:
     from io import StringIO
 import csv
@@ -30,9 +30,8 @@ _DEPENDS = ['state']
 _ZERO = Decimal('0.0')
 
 
-class Move:
+class Move(metaclass=PoolMeta):
     __name__ = 'account.move'
-    __metaclass__ = PoolMeta
 
     @classmethod
     def _get_origin(cls):
@@ -585,7 +584,7 @@ class ImportPayments(Wizard):
         dialect = csv.Sniffer().sniff(str(self.start.data[:1024]))
         reader = csv.reader(StringIO.StringIO(str(self.start.data)),
             dialect=dialect)
-        reader.next()  # Skip header line
+        next(reader)  # Skip header line
         payments = []
         for row in reader:
             payments.append(self.get_payment(row))
