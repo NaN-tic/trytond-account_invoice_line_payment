@@ -47,12 +47,6 @@ Create chart of accounts::
     >>> receivable = accounts['receivable']
     >>> cash = accounts['cash']
 
-    >>> Journal = Model.get('account.journal')
-    >>> cash_journal, = Journal.find([('type', '=', 'cash')])
-    >>> cash_journal.credit_account = cash
-    >>> cash_journal.debit_account = cash
-    >>> cash_journal.save()
-
 Create tax::
 
     >>> tax = create_tax(Decimal('.10'))
@@ -293,14 +287,20 @@ Create a payment group for reconciling with write-off::
     >>> first_payment, = group.payments
     >>> sequence_journal, = Sequence.find([('code', '=', 'account.journal')])
     >>> journal_writeoff = Journal(name='Write-Off', type='write-off',
-    ...     sequence=sequence_journal,
-    ...     credit_account=revenue, debit_account=expense)
+    ...     sequence=sequence_journal)
     >>> journal_writeoff.save()
+    >>> WriteOff = Model.get('account.move.reconcile.write_off')
+    >>> writeoff_method = WriteOff()
+    >>> writeoff_method.name = 'Writeoff'
+    >>> writeoff_method.journal = journal_writeoff
+    >>> writeoff_method.credit_account = revenue
+    >>> writeoff_method.debit_account = expense
+    >>> writeoff_method.save()
     >>> writeoff = Wizard('account.invoice.line.payment.write-off',
     ...     [first_payment])
     >>> writeoff.form.amount
     Decimal('20.00')
-    >>> writeoff.form.journal = journal_writeoff
+    >>> writeoff.form.writeoff = writeoff_method
     >>> writeoff.form.description = 'Write off'
     >>> writeoff.execute('create_')
     >>> group.reload()

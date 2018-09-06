@@ -461,7 +461,7 @@ class Payment(Workflow, ModelSQL, ModelView):
         cls.process_invoices(payments)
         Group.process(list(groups))
 
-    def get_difference_move(self, journal, date=None, description=None):
+    def get_difference_move(self, writeoff, date=None, description=None):
         pool = Pool()
         Period = pool.get('account.period')
         Move = pool.get('account.move')
@@ -472,11 +472,11 @@ class Payment(Workflow, ModelSQL, ModelView):
         reconcile_account = self.line.invoice.account
         reconcile_party = self.group.party
         if amount >= 0:
-            account = journal.debit_account
+            account = writeoff.debit_account
         else:
-            account = journal.credit_account
+            account = writeoff.credit_account
         move = Move()
-        move.journal = journal
+        move.journal = writeoff.journal
         move.period = Period(Period.find(reconcile_account.company.id,
                 date=date))
         move.date = date
@@ -599,8 +599,8 @@ class ImportPayments(Wizard):
 class CreateWriteOffMoveStart(ModelView):
     'Create Write-Off Move'
     __name__ = 'account.invoice.line.payment.write-off.start'
-    journal = fields.Many2One('account.journal', 'Journal', required=True,
-        domain=[
+    writeoff = fields.Many2One('account.move.reconcile.write_off', 'Journal',
+        required=True, domain=[
             ('type', '=', 'write-off'),
             ])
     date = fields.Date('Date', required=True)
@@ -636,8 +636,8 @@ class CreateWriteOffMove(Wizard):
         pool = Pool()
         Payment = pool.get('account.invoice.line.payment')
         payment = self.get_payment()
-        move = payment.get_difference_move(self.start.journal, self.start.date,
-            self.start.description)
+        move = payment.get_difference_move(self.start.writeoff,
+            self.start.date, self.start.description)
         move.save()
         payment.difference_move = move
         payment.save()
