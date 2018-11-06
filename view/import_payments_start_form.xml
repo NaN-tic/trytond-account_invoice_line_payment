@@ -3,7 +3,7 @@
       copyright notices and license terms. -->
 <form col="2">
     <label name="data"/>
-    <field name="data" widget="date"/>
+    <field name="data"/>
     <label name="confirm"/>
     <field name="confirm"/>
 </form>
