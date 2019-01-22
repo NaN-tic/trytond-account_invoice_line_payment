@@ -3,6 +3,7 @@
 from trytond.pool import Pool
 from . import invoice
 from . import payment
+from . import party
 
 
 def register():
@@ -18,4 +19,5 @@ def register():
     Pool.register(
         payment.ImportPayments,
         payment.CreateWriteOffMove,
+        party.PartyReplace,
         module='account_invoice_line_payment', type_='wizard')

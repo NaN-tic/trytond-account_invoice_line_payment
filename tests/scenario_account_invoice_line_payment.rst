@@ -26,11 +26,6 @@ Create company::
     >>> _ = create_company()
     >>> company = get_company()
 
-Reload the context::
-
-    >>> User = Model.get('res.user')
-    >>> config._context = User.get_preferences(True, config.context)
-
 Create fiscal year::
 
     >>> fiscalyear = set_fiscalyear_invoice_sequences(
