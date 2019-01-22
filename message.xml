@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data group="1">
+      <record model="ir.message" id="invalid_amounts">
+          <field name="text">Total payments amount "%(amount)s" in payment group "%(payment)s" must match Move Line amount "%(move_line_amount)s".</field>
+      </record>
+      <record model="ir.message" id="delete_draft">
+          <field name="text">Payment "%(payment)s" must be in draft state before deletion.</field>
+      </record>
+      <record model="ir.message" id="done_needs_line">
+          <field name="text">Payment "%(payment)s" must have an invoice line before it can be done.</field>
+      </record>
+      <record model="ir.message" id="different_amount">
+          <field name="text">Payment "%(payment)s" can not be mark as done as it has a difference of "%(difference)s" between it amount and its line amount.</field>
+      </record>
+    </data>
+</tryton>

@@ -1,37 +1,6 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
-
-msgctxt "error:account.invoice.line.payment.group:"
-msgid ""
-"There can not be two Invoice Line Payment Groups with the same Move Line."
-msgstr ""
-"No puede existir dos Grupos de pago de lineas de factura con el mismo Apunte"
-" contable."
-
-msgctxt "error:account.invoice.line.payment.group:"
-msgid ""
-"Total payments amount \"%s\" in payment group \"%s\" must match Move Line "
-"amount \"%s\"."
-msgstr ""
-"El importe total de los pagos \"%s\" del grupo de pagos \"%s\" debe "
-"coincidir con l'importe \"%s\" del su apunte contable."
-
-msgctxt "error:account.invoice.line.payment:"
-msgid ""
-"Payment \"%(payment)s\" can not be mark as done as it has a difference of "
-"\"%(difference)s\" between it amount and its line amount."
-msgstr ""
-"El pago \"%(payment)s\" no se puede marcar como realizado porqué tiene una "
-"diferencia de %(difference)s\" entre su importe y el importe de sus líneas."
-
-msgctxt "error:account.invoice.line.payment:"
-msgid "Payment \"%s\" must be in draft state before deletion."
-msgstr "El pago \"%s\" debe estar en estado borrador antes de ser borrado."
-
-msgctxt "error:account.invoice.line.payment:"
-msgid "Payment \"%s\" must have an invoice line before it can be done."
-msgstr "El pago \"%s\" debe tener una linea de factura antes de ser realizado."
 
 msgctxt "field:account.invoice,line_payments:"
 msgid "Line Payments"
@@ -287,6 +256,30 @@ msgctxt ""
 "model:ir.action.act_window.domain,name:act_payment_party_domain_draft"
 msgid "Draft"
 msgstr "Borrador"
+
+msgctxt "model:ir.message,text:account.invoice.line.payment.group:"
+msgid ""
+"Total payments amount \"%(amount)s\" in payment group \"%(payment)s\" must match Move Line "
+"amount \"%(move_line_amount)s\"."
+msgstr ""
+"El importe total de los pagos \"%(amount)s\" del grupo de pagos \"%(payment)s\" debe "
+"coincidir con l'importe \"%(move_line_amount)s\" del su apunte contable."
+
+msgctxt "model:ir.message,text:account.invoice.line.payment:"
+msgid ""
+"Payment \"%(payment)s\" can not be mark as done as it has a difference of "
+"\"%(difference)s\" between it amount and its line amount."
+msgstr ""
+"El pago \"%(payment)s\" no se puede marcar como realizado porqué tiene una "
+"diferencia de %(difference)s\" entre su importe y el importe de sus líneas."
+
+msgctxt "model:ir.message,text:account.invoice.line.payment:"
+msgid "Payment \"%(payment)s\" must be in draft state before deletion."
+msgstr "El pago \"%(payment)s\" debe estar en estado borrador antes de ser borrado."
+
+msgctxt "model:ir.message,text:account.invoice.line.payment:"
+msgid "Payment \"%(payment)s\" must have an invoice line before it can be done."
+msgstr "El pago \"%(payment)s\" debe tener una linea de factura antes de ser realizado."
 
 msgctxt "model:ir.ui.menu,name:menu_invoice_line_payment"
 msgid "Invoice Line Payments"

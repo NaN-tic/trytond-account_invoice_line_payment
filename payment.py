@@ -15,6 +15,8 @@ from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval, If, Bool
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
 __all__ = ['Move', 'Group', 'Payment', 'ImportPaymentsStart', 'ImportPayments',
     'CreateWriteOffMoveStart', 'CreateWriteOffMove']
@@ -92,10 +94,6 @@ class Group(Workflow, ModelSQL, ModelView):
                 ('confirmed', 'done'),
                 ('done', 'confirmed'),
                 ))
-        cls._error_messages.update({
-                'invalid_amounts': ('Total payments amount "%s" in payment '
-                    'group "%s" must match Move Line amount "%s".'),
-                })
         cls._buttons.update({
                 'draft': {
                     'invisible': Eval('state') != 'confirmed',
@@ -214,8 +212,10 @@ class Group(Workflow, ModelSQL, ModelView):
         for group in groups:
             payments_amount = sum([x.amount for x in group.payments])
             if payments_amount != group.move_line_amount:
-                cls.raise_user_error('invalid_amounts', (payments_amount,
-                        group.rec_name, group.move_line_amount))
+                raise UserError(gettext('account_invoice_line_payment.invalid_amounts',
+                    amount=payments_amount,
+                    name=group.rec_name,
+                    move_line_amount=group.move_line_amount))
 
     @classmethod
     @ModelView.button
@@ -323,15 +323,6 @@ class Payment(Workflow, ModelSQL, ModelView):
     def __setup__(cls):
         super(Payment, cls).__setup__()
         cls._order.insert(0, ('date', 'DESC'))
-        cls._error_messages.update({
-                'delete_draft': ('Payment "%s" must be in draft state before '
-                    'deletion.'),
-                'done_needs_line': ('Payment "%s" must have an invoice line '
-                    'before it can be done.'),
-                'different_amount': ('Payment "%(payment)s" can not be mark as'
-                    ' done as it has a difference of "%(difference)s" between '
-                    'it amount and its line amount.'),
-                })
         cls._transitions |= set((
                 ('draft', 'done'),
                 ('done', 'draft'),
@@ -414,7 +405,8 @@ class Payment(Workflow, ModelSQL, ModelView):
     def delete(cls, payments):
         for payment in payments:
             if payment.state != 'draft':
-                cls.raise_user_error('delete_draft', (payment.rec_name))
+                raise UserError(gettext('account_invoice_line_payment.delete_draft',
+                    payment=payment.rec_name))
         super(Payment, cls).delete(payments)
 
     @classmethod
@@ -445,12 +437,13 @@ class Payment(Workflow, ModelSQL, ModelView):
         moves = []
         for payment in payments:
             if not payment.line:
-                cls.raise_user_error('done_needs_line', payment.rec_name)
+                raise UserError(gettext('account_invoice_line_payment.done_needs_line',
+                    payment=payment.rec_name))
             if payment.difference < Decimal(0) and not payment.difference_move:
-                cls.raise_user_error('different_amount', {
-                        'payment': payment.rec_name,
-                        'difference': payment.difference,
-                        })
+                raise UserError(gettext('account_invoice_line_payment.different_amount',
+                    payment=payment.rec_name,
+                    difference=payment.difference))
+
             if payment.difference_move:
                 moves.append(payment.difference_move)
             groups.add(payment.group)
