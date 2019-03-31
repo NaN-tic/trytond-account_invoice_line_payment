@@ -16,8 +16,8 @@ __all__ = ['Invoice', 'InvoiceLine']
 class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
-    line_payments = fields.Function(fields.One2Many(
-            'account.invoice.line.payment', 'line', 'Line Payments',
+    line_payments = fields.Function(fields.Many2Many(
+            'account.invoice.line.payment', None,None, 'Line Payments',
             states={
                 'invisible': ~Bool(Eval('line_payments')),
                 }),

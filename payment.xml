@@ -188,6 +188,7 @@
         </record>
 
           <record model="ir.rule.group" id="rule_group_account_invoice_line_payment">
+            <field name="name">Invoice line payment</field>
             <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
             <field name="global_p" eval="True"/>
           </record>
@@ -200,6 +201,7 @@
           </record>
 
           <record model="ir.rule.group" id="rule_group_account_invoice_line_payment_group">
+            <field name="name">Invoice line payment group</field>
             <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
             <field name="global_p" eval="True"/>
           </record>
