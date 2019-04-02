@@ -4,11 +4,11 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:account.invoice,line_payments:"
 msgid "Line Payments"
-msgstr "Pagos de las líneas"
+msgstr "Pagos de línea"
 
 msgctxt "field:account.invoice.line,payment_amount:"
 msgid "Payment Amount"
-msgstr "Importe pendiente"
+msgstr "Importe del pago"
 
 msgctxt "field:account.invoice.line,payments:"
 msgid "Payments"
@@ -30,10 +30,6 @@ msgctxt "field:account.invoice.line.payment,create_uid:"
 msgid "Create User"
 msgstr "Usuario de creación"
 
-msgctxt "field:account.invoice.line.payment,currency:"
-msgid "Currency"
-msgstr "Moneda"
-
 msgctxt "field:account.invoice.line.payment,currency_digits:"
 msgid "Currency Digits"
 msgstr "Decimales de la moneda"
@@ -52,7 +48,7 @@ msgstr "Diferencia"
 
 msgctxt "field:account.invoice.line.payment,difference_move:"
 msgid "Diference Move"
-msgstr "Asiento diferencia"
+msgstr "Asiento diferente"
 
 msgctxt "field:account.invoice.line.payment,group:"
 msgid "Group"
@@ -72,11 +68,11 @@ msgstr "Línea"
 
 msgctxt "field:account.invoice.line.payment,party:"
 msgid "Party"
-msgstr "Tercero"
+msgstr "Terceros"
 
 msgctxt "field:account.invoice.line.payment,rec_name:"
-msgid "Name"
-msgstr "Nombre"
+msgid "Record Name"
+msgstr "Nombre registro"
 
 msgctxt "field:account.invoice.line.payment,state:"
 msgid "State"
@@ -108,7 +104,7 @@ msgstr "Moneda"
 
 msgctxt "field:account.invoice.line.payment.group,currency_digits:"
 msgid "Currency Digits"
-msgstr "Decimals de la moneda"
+msgstr "Decimales de la moneda"
 
 msgctxt "field:account.invoice.line.payment.group,id:"
 msgid "ID"
@@ -128,15 +124,15 @@ msgstr "Importe apunte"
 
 msgctxt "field:account.invoice.line.payment.group,party:"
 msgid "Party"
-msgstr "Tercero"
+msgstr "Terceros"
 
 msgctxt "field:account.invoice.line.payment.group,payments:"
 msgid "Payments"
 msgstr "Pagos"
 
 msgctxt "field:account.invoice.line.payment.group,rec_name:"
-msgid "Name"
-msgstr "Nombre"
+msgid "Record Name"
+msgstr "Nombre registro"
 
 msgctxt "field:account.invoice.line.payment.group,reference:"
 msgid "Reference"
@@ -156,11 +152,11 @@ msgstr "Usuario modificación"
 
 msgctxt "field:account.invoice.line.payment.import.start,confirm:"
 msgid "Confirm group"
-msgstr "Confirmar el grupo"
+msgstr "Confirmar grupo"
 
 msgctxt "field:account.invoice.line.payment.import.start,data:"
 msgid "File"
-msgstr "Archivo"
+msgstr "Fichero"
 
 msgctxt "field:account.invoice.line.payment.import.start,id:"
 msgid "ID"
@@ -186,37 +182,37 @@ msgctxt "field:account.invoice.line.payment.write-off.start,id:"
 msgid "ID"
 msgstr "Identificador"
 
-msgctxt "field:account.invoice.line.payment.write-off.start,journal:"
+msgctxt "field:account.invoice.line.payment.write-off.start,writeoff:"
 msgid "Journal"
 msgstr "Diario"
 
 msgctxt "model:account.invoice.line.payment,name:"
 msgid "Invoice Line Payment"
-msgstr "Pago linea de factura"
+msgstr "Pago de línea de factura"
 
 msgctxt "model:account.invoice.line.payment.group,name:"
 msgid "Invoice Line Payment Group"
-msgstr "Grupo de pago linea de factura"
+msgstr "Grupo de pago de línea de factura"
 
 msgctxt "model:account.invoice.line.payment.import.start,name:"
 msgid "Import Payments Start"
-msgstr "Inicio Importar pagos"
+msgstr "Inicio importar pagos"
 
 msgctxt "model:account.invoice.line.payment.write-off.start,name:"
-msgid "Creat Write-Off Move"
-msgstr "Crear movimiento de desajuste"
+msgid "Create Write-Off Move"
+msgstr "Crear apunte de cancelación"
 
 msgctxt "model:ir.action,name:act_payment"
 msgid "Invoice Line Payment"
-msgstr "Pago linea de factura"
+msgstr "Pagament línia de factura"
 
 msgctxt "model:ir.action,name:act_payment_group"
 msgid "Invoice Line Payment Group"
-msgstr "Grupo de pago linea de factura"
+msgstr "Grupo de pago de línea de factura"
 
 msgctxt "model:ir.action,name:act_payment_party"
 msgid "Invoice Line Payment"
-msgstr "Pagos de linea de factura"
+msgstr "Pago de línea de factura"
 
 msgctxt "model:ir.action,name:wizard_import_payments"
 msgid "Import Payments"
@@ -224,11 +220,11 @@ msgstr "Importar pagos"
 
 msgctxt "model:ir.action,name:wizard_writeoff"
 msgid "Create Write-Off Move"
-msgstr "Crear movimiento de desajuste"
+msgstr "Crear apunte de cancelación"
 
 msgctxt "model:ir.action.act_window.domain,name:act_payment_domain_all"
 msgid "All"
-msgstr "Todos"
+msgstr "Todo"
 
 msgctxt "model:ir.action.act_window.domain,name:act_payment_domain_draft"
 msgid "Draft"
@@ -236,11 +232,11 @@ msgstr "Borrador"
 
 msgctxt "model:ir.action.act_window.domain,name:act_payment_group_domain_all"
 msgid "All"
-msgstr "Todos"
+msgstr "Todo"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_payment_group_domain_confirmed"
-msgid "Confimred"
+msgid "Confirmed"
 msgstr "Confirmado"
 
 msgctxt ""
@@ -250,48 +246,100 @@ msgstr "Borrador"
 
 msgctxt "model:ir.action.act_window.domain,name:act_payment_party_domain_all"
 msgid "All"
-msgstr "Todos"
+msgstr "Todo"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_payment_party_domain_draft"
 msgid "Draft"
 msgstr "Borrador"
 
-msgctxt "model:ir.message,text:account.invoice.line.payment.group:"
-msgid ""
-"Total payments amount \"%(amount)s\" in payment group \"%(payment)s\" must match Move Line "
-"amount \"%(move_line_amount)s\"."
-msgstr ""
-"El importe total de los pagos \"%(amount)s\" del grupo de pagos \"%(payment)s\" debe "
-"coincidir con l'importe \"%(move_line_amount)s\" del su apunte contable."
+msgctxt "model:ir.message,text:delete_draft"
+msgid "Payment \"%(payment)s\" must be in draft state before deletion."
+msgstr "El pago \"%(payment)s\" debe estar en estado borrador antes de borrarlo."
 
-msgctxt "model:ir.message,text:account.invoice.line.payment:"
+msgctxt "model:ir.message,text:different_amount"
 msgid ""
 "Payment \"%(payment)s\" can not be mark as done as it has a difference of "
 "\"%(difference)s\" between it amount and its line amount."
 msgstr ""
-"El pago \"%(payment)s\" no se puede marcar como realizado porqué tiene una "
-"diferencia de %(difference)s\" entre su importe y el importe de sus líneas."
+"El pago \"%(payment)s\" no se puede marcar como finalizado ya que tiene una "
+"diferencia de \"%(difference)s\" entre el importe y el importe de su línea."
 
-msgctxt "model:ir.message,text:account.invoice.line.payment:"
-msgid "Payment \"%(payment)s\" must be in draft state before deletion."
-msgstr "El pago \"%(payment)s\" debe estar en estado borrador antes de ser borrado."
-
-msgctxt "model:ir.message,text:account.invoice.line.payment:"
+msgctxt "model:ir.message,text:done_needs_line"
 msgid "Payment \"%(payment)s\" must have an invoice line before it can be done."
-msgstr "El pago \"%(payment)s\" debe tener una linea de factura antes de ser realizado."
+msgstr ""
+"El pago \"%(payments)s\" debe tener una línea de factura antes de que se "
+"pueda finalizar."
+
+msgctxt "model:ir.message,text:invalid_amounts"
+msgid ""
+"Total payments amount \"%(amount)s\" in payment group \"%(payment)s\" must "
+"match Move Line amount \"%(move_line_amount)s\"."
+msgstr ""
+"El importe total de los pagos \"%(amount)s\" del grupo de pago "
+"\"%(payment)s\" debe coincidir con el importe del apunte "
+"\"%(move_line_amount)s\"."
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_create_writeoff_button"
+msgid "Create WriteOff Move"
+msgstr "Crear apunte de cancelación"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_done_button"
+msgid "Done"
+msgstr "Realizado"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_draft_button"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_group_confirm_button"
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_group_draft_button"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_group_import_payments_button"
+msgid "Import Payments"
+msgstr "Importar pagos"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_group_search_lines_button"
+msgid "Search Invoice Lines"
+msgstr "Buscar líneas de factura"
+
+msgctxt ""
+"model:ir.model.button,string:account_invoice_line_payment_search_line_button"
+msgid "Search Invoice Line"
+msgstr "Buscar línea de factura"
+
+msgctxt "model:ir.rule.group,name:rule_group_account_invoice_line_payment"
+msgid "Invoice line payment"
+msgstr "Pago de línea de factura"
+
+msgctxt ""
+"model:ir.rule.group,name:rule_group_account_invoice_line_payment_group"
+msgid "Invoice line payment group"
+msgstr "Grupo de pago de línea de factura"
 
 msgctxt "model:ir.ui.menu,name:menu_invoice_line_payment"
 msgid "Invoice Line Payments"
-msgstr "Pagos linea de factura"
+msgstr "Pagos de línea de factura"
 
 msgctxt "model:ir.ui.menu,name:menu_invoice_line_payment_group"
 msgid "Invoice Line Payment Groups"
-msgstr "Grupos de pago linea de factura"
+msgstr "Grupo de pago de línea de factura"
 
 msgctxt "model:res.group,name:group_account_invoice_line_payment"
 msgid "Account Invoice Line Payment"
-msgstr "Pago de lineas de factura"
+msgstr "Cuenta de pago de línea de factura"
 
 msgctxt "selection:account.invoice.line.payment,kind:"
 msgid "Customer"
@@ -329,61 +377,13 @@ msgctxt "selection:account.invoice.line.payment.group,state:"
 msgid "Draft"
 msgstr "Borrador"
 
-msgctxt "view:account.invoice.line.payment.group:"
-msgid "Confirm"
-msgstr "Confirmar"
-
-msgctxt "view:account.invoice.line.payment.group:"
-msgid "Draft"
-msgstr "Borrador"
-
-msgctxt "view:account.invoice.line.payment.group:"
-msgid "Import Payments"
-msgstr "Importar pagos"
-
-msgctxt "view:account.invoice.line.payment.group:"
-msgid "Invoice Line Payment Group"
-msgstr "Grupo de pago linea de factura"
-
-msgctxt "view:account.invoice.line.payment.group:"
-msgid "Search Invoice Lines"
-msgstr "Buscar líneas de factura"
-
-msgctxt "view:account.invoice.line.payment.import.start:"
-msgid "Import Payments"
-msgstr "Importar pagos"
-
-msgctxt "view:account.invoice.line.payment.write-off.start:"
-msgid "Write-Off"
-msgstr "Desajuste"
-
-msgctxt "view:account.invoice.line.payment:"
-msgid "Create WriteOff Move"
-msgstr "Crear movimiento de desajuste"
-
-msgctxt "view:account.invoice.line.payment:"
-msgid "Done"
-msgstr "Realizado"
-
-msgctxt "view:account.invoice.line.payment:"
-msgid "Draft"
-msgstr "Borrador"
-
-msgctxt "view:account.invoice.line.payment:"
-msgid "Invoice Line Payment"
-msgstr "Pago linea de factura"
-
-msgctxt "view:account.invoice.line.payment:"
-msgid "Search Invoice Line"
-msgstr "Buscar línea de factura"
-
 msgctxt "wizard_button:account.invoice.line.payment.import,start,end:"
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgctxt "wizard_button:account.invoice.line.payment.import,start,import_:"
 msgid "Import"
-msgstr "Importar"
+msgstr "Importe"
 
 msgctxt "wizard_button:account.invoice.line.payment.write-off,start,create_:"
 msgid "Create"
