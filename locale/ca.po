@@ -56,7 +56,7 @@ msgstr "Grup"
 
 msgctxt "field:account.invoice.line.payment,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:account.invoice.line.payment,kind:"
 msgid "Kind"
@@ -84,7 +84,7 @@ msgstr "Usuari de creació"
 
 msgctxt "field:account.invoice.line.payment,write_uid:"
 msgid "Write User"
-msgstr "Usuari modificació"
+msgstr "Usuari de modificació"
 
 msgctxt "field:account.invoice.line.payment.group,company:"
 msgid "Company"
@@ -108,7 +108,7 @@ msgstr "Dígits de la moneda"
 
 msgctxt "field:account.invoice.line.payment.group,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:account.invoice.line.payment.group,kind:"
 msgid "Kind"
@@ -148,7 +148,7 @@ msgstr "Usuari de creació"
 
 msgctxt "field:account.invoice.line.payment.group,write_uid:"
 msgid "Write User"
-msgstr "Usuari modificació"
+msgstr "Usuari de modificació"
 
 msgctxt "field:account.invoice.line.payment.import.start,confirm:"
 msgid "Confirm group"
@@ -160,7 +160,7 @@ msgstr "Fitxer"
 
 msgctxt "field:account.invoice.line.payment.import.start,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:account.invoice.line.payment.write-off.start,amount:"
 msgid "Amount"
@@ -180,7 +180,7 @@ msgstr "Descripció"
 
 msgctxt "field:account.invoice.line.payment.write-off.start,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:account.invoice.line.payment.write-off.start,writeoff:"
 msgid "Journal"
