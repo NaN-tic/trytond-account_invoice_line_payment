@@ -272,5 +272,11 @@
         <menuitem action="act_payment"  id="menu_invoice_line_payment"
             parent="menu_invoice_line_payment_group" sequence="10"
             name="Invoice Line Payments"/>
+
+        <record model="ir.ui.icon" id="find_icon">
+            <field name="name">tryton-find</field>
+            <field name="path">icons/tryton-find.svg</field>
+        </record>
+
     </data>
 </tryton>
