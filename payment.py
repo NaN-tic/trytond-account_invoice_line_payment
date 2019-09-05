@@ -101,7 +101,7 @@ class Group(Workflow, ModelSQL, ModelView):
                     },
                 'confirm': {
                     'invisible': Eval('state') != 'draft',
-                    'icon': 'tryton-go-next',
+                    'icon': 'tryton-forward',
                     },
                 'search_lines': {
                     'invisible': Eval('state') == 'done',
@@ -109,7 +109,7 @@ class Group(Workflow, ModelSQL, ModelView):
                     },
                 'import_payments': {
                     'invisible': Eval('state') != 'draft',
-                    'icon': 'tryton-executable',
+                    'icon': 'tryton-launch',
                     },
                 })
         t = cls.__table__()
@@ -330,11 +330,11 @@ class Payment(Workflow, ModelSQL, ModelView):
         cls._buttons.update({
                 'draft': {
                     'invisible': Eval('state') != 'done',
-                    'icon': 'tryton-go-previous',
+                    'icon': 'tryton-back',
                     },
                 'done': {
                     'invisible': Eval('state') != 'draft',
-                    'icon': 'tryton-go-next',
+                    'icon': 'tryton-forward',
                     },
                 'search_line': {
                     'invisible': Bool(Eval('line')),
