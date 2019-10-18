@@ -1,9 +1,6 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-try:
-    import io as StringIO
-except ImportError:
-    from io import StringIO
+from io import StringIO
 import csv
 import datetime
 from decimal import Decimal
