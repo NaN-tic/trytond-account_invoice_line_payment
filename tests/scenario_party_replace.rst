@@ -62,14 +62,6 @@ Create tax::
     >>> credit_note_tax_code = create_tax_code(tax, 'tax', 'credit')
     >>> credit_note_tax_code.save()
 
-Set Cash journal::
-
-    >>> Journal = Model.get('account.journal')
-    >>> journal_cash, = Journal.find([('type', '=', 'cash')])
-    >>> journal_cash.credit_account = account_cash
-    >>> journal_cash.debit_account = account_cash
-    >>> journal_cash.save()
-
 Create party::
 
     >>> Party = Model.get('party.party')
