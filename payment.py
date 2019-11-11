@@ -366,7 +366,7 @@ class Payment(Workflow, ModelSQL, ModelView):
             return value.id
         return value
 
-    @fields.depends('line', 'amount',
+    @fields.depends('line', '_parent_line.amount', 'amount',
         methods=['on_change_with_currency_digits'])
     def on_change_with_difference(self, name=None):
         if not self.line or not self.amount:
@@ -375,7 +375,7 @@ class Payment(Workflow, ModelSQL, ModelView):
         amount = (self.line.amount + self.line.tax_amount) - self.amount
         return amount.quantize(Decimal(str(10 ** -digits)))
 
-    @fields.depends('group', 'company')
+    @fields.depends('group', '_parent_group.company', 'company')
     def on_change_with_company(self, name=None):
         if self.group:
             return self.group.company.id
@@ -384,7 +384,7 @@ class Payment(Workflow, ModelSQL, ModelView):
     def search_group_field(cls, name, clause):
         return [('group.%s' % clause[0],) + tuple(clause[1:])]
 
-    @fields.depends('group')
+    @fields.depends('group', '_parent_group.currency')
     def on_change_with_currency_digits(self, name=None):
         if self.group:
             return self.group.currency.digits
