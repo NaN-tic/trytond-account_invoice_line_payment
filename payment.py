@@ -211,7 +211,7 @@ class Group(Workflow, ModelSQL, ModelView):
             if payments_amount != group.move_line_amount:
                 raise UserError(gettext('account_invoice_line_payment.invalid_amounts',
                     amount=payments_amount,
-                    name=group.rec_name,
+                    payment=group.rec_name,
                     move_line_amount=group.move_line_amount))
 
     @classmethod
