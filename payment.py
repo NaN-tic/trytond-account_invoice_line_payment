@@ -560,7 +560,7 @@ class ImportPayments(Wizard):
         Payment = pool.get('account.invoice.line.payment')
         date, amount, description = row
         payment = Payment()
-        date_args = map(int, date.split('/'))
+        date_args = list(map(int, date.split('/')))
         date_args.reverse()
         payment.date = datetime.date(*date_args)
         payment.amount = Decimal(str(amount.replace(',', '.')))
@@ -572,7 +572,7 @@ class ImportPayments(Wizard):
         Group = pool.get('account.invoice.line.payment.group')
         group = Group(Transaction().context['active_id'])
         dialect = csv.Sniffer().sniff(str(self.start.data[:1024]))
-        reader = csv.reader(StringIO.StringIO(str(self.start.data)),
+        reader = csv.reader(StringIO(self.start.data.decode('iso-8859-1')),
             dialect=dialect)
         next(reader)  # Skip header line
         payments = []
