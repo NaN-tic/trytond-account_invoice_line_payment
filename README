@@ -5,7 +5,7 @@ This module is developed and tested over a Tryton server and core modules
 patched with patches from `trytond-patches project`_ (take care with the
 branches). Maybe these patches are required for the module to work.
 
-.. _trytond-patches project: https://bitbucket.org/nantic/trytond-patches
+.. _trytond-patches project: https://github.com/NaN-tic/trytond-patches
 
 Installing
 ----------
