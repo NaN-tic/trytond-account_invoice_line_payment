@@ -375,7 +375,7 @@ class Payment(Workflow, ModelSQL, ModelView):
         amount = (self.line.amount + self.line.tax_amount) - self.amount
         return amount.quantize(Decimal(str(10 ** -digits)))
 
-    @fields.depends('group', '_parent_group.company', 'company')
+    @fields.depends('group', '_parent_group.company')
     def on_change_with_company(self, name=None):
         if self.group:
             return self.group.company.id
