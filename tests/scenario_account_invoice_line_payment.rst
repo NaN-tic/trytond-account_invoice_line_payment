@@ -219,7 +219,7 @@ Check that the invoice is reconciled::
 
     >>> invoice.reload()
     >>> invoice.amount_to_pay
-    Decimal('0.0')
+    Decimal('0')
     >>> invoice.reconciled
     True
     >>> invoice.state
