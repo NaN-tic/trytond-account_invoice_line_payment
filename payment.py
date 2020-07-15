@@ -268,6 +268,8 @@ class Payment(Workflow, ModelSQL, ModelView):
         searcher='search_group_field')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
+    currency = fields.Function(fields.Many2One('currency.currency',
+        'Currency'), 'get_group_field', searcher='search_group_field')
     date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
     amount = fields.Numeric('Amount', required=True,
         digits=(16, Eval('currency_digits', 2)), states=_STATES,
@@ -275,13 +277,12 @@ class Payment(Workflow, ModelSQL, ModelView):
     line = fields.Many2One('account.invoice.line', 'Line', ondelete='RESTRICT',
         domain=[
             ('type', '=', 'line'),
-            If(Eval('_parent_group', {}).get('kind', '') == 'customer',
+            If(Eval('kind') == 'customer',
                 ('invoice.type', '=', 'out'),
                 ('invoice.type', '=', 'in'),
                 ),
-            ('invoice.party', '=', Eval('_parent_group', {}).get('party', -1)),
-            ('invoice.currency', '=',
-                Eval('_parent_group', {}).get('currency', -1)),
+            ('party', '=', Eval('party')),
+            ('currency', '=', Eval('currency')),
             ],
         # This domain breaks when moving a paiment from done to draft with a
         # paid invoice.
@@ -298,7 +299,7 @@ class Payment(Workflow, ModelSQL, ModelView):
             'readonly': Eval('state') != 'draft',
             'required': Eval('state') == 'done',
             },
-        depends=['state', 'group'])
+        depends=['state', 'group', 'kind', 'party', 'currency'])
     description = fields.Char('Description', states=_STATES, depends=_DEPENDS)
     group = fields.Many2One('account.invoice.line.payment.group', 'Group',
         readonly=True, required=True, ondelete='CASCADE')
@@ -386,7 +387,7 @@ class Payment(Workflow, ModelSQL, ModelView):
 
     @fields.depends('group', '_parent_group.currency')
     def on_change_with_currency_digits(self, name=None):
-        if self.group:
+        if self.group and self.group.currency:
             return self.group.currency.digits
         return 2
 
@@ -394,8 +395,9 @@ class Payment(Workflow, ModelSQL, ModelView):
     def process_invoices(cls, payments):
         pool = Pool()
         Invoice = pool.get('account.invoice')
-        invoices = [p.line.invoice for p in payments
-            if p.line and p.line.invoice]
+        invoices = list({p.line.invoice for p in payments
+            if p.line and p.line.invoice})
+        invoices = Invoice.browse(invoices)
         Invoice.process(invoices)
 
     @classmethod
