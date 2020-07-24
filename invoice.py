@@ -39,8 +39,8 @@ class Invoice(metaclass=PoolMeta):
     def get_reconciled(self, name):
         lines_to_pay = [l for l in self.lines if l.type == 'line' and
             l.amount != Decimal('0.0')]
-        if lines_to_pay and all(l.paid for l in lines_to_pay):
-            return True
+        if not (lines_to_pay and all(l.paid for l in lines_to_pay)):
+            return
         return super(Invoice, self).get_reconciled(name)
 
     def get_line_payments(self, name):
