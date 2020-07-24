@@ -263,13 +263,13 @@ class Payment(Workflow, ModelSQL, ModelView):
     company = fields.Function(fields.Many2One('company.company', 'Company'),
         'on_change_with_company', searcher='search_group_field')
     party = fields.Function(fields.Many2One('party.party', 'Party'),
-        'get_group_field', searcher='search_group_field')
-    kind = fields.Function(fields.Selection(KINDS, 'Kind'), 'get_group_field',
-        searcher='search_group_field')
+        'on_change_with_party', searcher='search_group_field')
+    kind = fields.Function(fields.Selection(KINDS, 'Kind'),
+        'on_change_with_kind', searcher='search_group_field')
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
         'on_change_with_currency_digits')
     currency = fields.Function(fields.Many2One('currency.currency',
-        'Currency'), 'get_group_field', searcher='search_group_field')
+        'Currency'), 'on_change_with_currency', searcher='search_group_field')
     date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
     amount = fields.Numeric('Amount', required=True,
         digits=(16, Eval('currency_digits', 2)), states=_STATES,
@@ -360,12 +360,17 @@ class Payment(Workflow, ModelSQL, ModelView):
     def default_state():
         return 'draft'
 
-    @fields.depends('group')
-    def get_group_field(self, name):
-        value = getattr(self.group, name)
-        if isinstance(value, ModelSQL):
-            return value.id
-        return value
+    @fields.depends('group', '_parent_group.kind')
+    def on_change_with_kind(self, name=None):
+        return self.group and self.group.kind
+
+    @fields.depends('group', '_parent_group.party')
+    def on_change_with_party(self, name=None):
+        return self.group and self.group.party and self.group.party.id
+
+    @fields.depends('group', '_parent_group.currency')
+    def on_change_with_currency(self, name=None):
+        return self.group and self.group.currency and self.group.currency.id
 
     @fields.depends('line', '_parent_line.amount', 'amount',
         methods=['on_change_with_currency_digits'])

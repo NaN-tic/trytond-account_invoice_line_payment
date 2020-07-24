@@ -5,6 +5,12 @@
     <label name="group"/>
     <field name="group"/>
     <newline/>
+    <label name="kind"/>
+    <field name="kind"/>
+    <label name="party"/>
+    <field name="party"/>
+    <label name="currency"/>
+    <field name="currency"/>
     <label name="date"/>
     <field name="date"/>
     <label name="description"/>
