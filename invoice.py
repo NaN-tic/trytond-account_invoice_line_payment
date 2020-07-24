@@ -24,6 +24,21 @@ class Invoice(metaclass=PoolMeta):
         'get_line_payments')
 
     @classmethod
+    def write(cls, *args):
+        Line = Pool().get('account.invoice.line')
+
+        to_write = []
+        actions = iter(args)
+        for invoices, values in zip(actions, actions):
+            if 'party' in values:
+                for invoice in invoices:
+                    to_write.extend((list(invoice.lines), {
+                        'party': values['party']}))
+        super(Invoice, cls).write(*args)
+        if to_write:
+            Line.write(*to_write)
+
+    @classmethod
     def get_amount_to_pay(cls, invoices, name):
         result = super(Invoice, cls).get_amount_to_pay(invoices, name)
         for invoice in invoices:
@@ -56,6 +71,17 @@ class InvoiceLine(metaclass=PoolMeta):
         searcher='search_payment_amount')
     payments = fields.One2Many('account.invoice.line.payment', 'line',
         'Payments', readonly=True)
+
+    @classmethod
+    def create(cls, vlist):
+        Invoice = Pool().get('account.invoice')
+
+        invoices = dict((x.id, x) for x in Invoice.browse(list(
+            set([vals['invoice'] for vals in vlist if vals.get('invoice')]))))
+        for vals in vlist:
+            if vals.get('invoice'):
+                vals['party'] = invoices.get(vals['invoice']).party.id
+        return super(InvoiceLine, cls).create(vlist)
 
     @property
     def paid(self):

@@ -52,6 +52,8 @@ Create customer::
     >>> Party = Model.get('party.party')
     >>> customer = Party(name='Customer')
     >>> customer.save()
+    >>> customer2 = Party(name='Customer2')
+    >>> customer2.save()
 
 Create account category::
 
@@ -215,13 +217,10 @@ Create a payment group for the remaining line::
     >>> group.state
     'done'
 
-
 Check that the invoice is reconciled::
 
     >>> invoice.reload()
-    >>> invoice.amount_to_pay
-    Decimal('0')
-    >>> invoice.reconciled
+    >>> invoice.amount_to_pay == Decimal('0.0')
     True
     >>> invoice.state
     'paid'
@@ -268,7 +267,6 @@ Create a Move for the reconciling the first line::
     ...         ('account', '=', receivable.id),
     ...         ])
 
-
 Create a payment group for reconciling with write-off::
 
     >>> Sequence = Model.get('ir.sequence')
@@ -307,7 +305,25 @@ Create a payment group for reconciling with write-off::
 Check that the invoice is reconciled::
 
     >>> invoice.reload()
-    >>> invoice.reconciled
-    True
     >>> invoice.state
     'paid'
+
+Upgrade party lines when create or write an invoice::
+
+    >>> invoice = Invoice()
+    >>> invoice.party = customer
+    >>> invoice.payment_term = payment_term
+    >>> line = invoice.lines.new()
+    >>> line.party = customer
+    >>> line.product = product
+    >>> line.quantity = 5
+    >>> line.unit_price = Decimal('40.0')
+    >>> invoice.save()
+    >>> line, = invoice.lines
+    >>> line.party == invoice.party
+    True
+    >>> invoice.party = customer2
+    >>> invoice.save()
+    >>> line, = invoice.lines
+    >>> line.party == invoice.party
+    True
