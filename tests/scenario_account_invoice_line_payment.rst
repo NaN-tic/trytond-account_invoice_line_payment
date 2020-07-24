@@ -92,10 +92,12 @@ Create invoice::
     >>> invoice.party = customer
     >>> invoice.payment_term = payment_term
     >>> line = invoice.lines.new()
+    >>> line.party = customer
     >>> line.product = product
     >>> line.quantity = 5
     >>> line.unit_price = Decimal('40.0')
     >>> line = invoice.lines.new()
+    >>> line.party = customer
     >>> line.product = product
     >>> line.quantity = 10
     >>> line.unit_price = Decimal('40.0')
@@ -148,7 +150,6 @@ Create a payment group for the first line::
     >>> group.kind = 'customer'
     >>> group.move_line = customer_move
     >>> group.save()
-
 
 Create a payment for the first line::
 
@@ -231,6 +232,7 @@ Create invoice to be partialy reconciled::
     >>> invoice.party = customer
     >>> invoice.payment_term = payment_term
     >>> line = invoice.lines.new()
+    >>> line.party = customer
     >>> line.product = product
     >>> line.quantity = 5
     >>> line.unit_price = Decimal('40.0')
