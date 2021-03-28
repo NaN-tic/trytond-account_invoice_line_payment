@@ -280,7 +280,7 @@ Create a payment group for reconciling with write-off::
     >>> first_payment.line = first_line
     >>> group.click('confirm')
     >>> first_payment, = group.payments
-    >>> sequence_journal, = Sequence.find([('code', '=', 'account.journal')])
+    >>> sequence_journal, = Sequence.find([('sequence_type.name', '=', 'Account Journal')])
     >>> journal_writeoff = Journal(name='Write-Off', type='write-off',
     ...     sequence=sequence_journal)
     >>> journal_writeoff.save()
