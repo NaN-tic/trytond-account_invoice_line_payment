@@ -34,9 +34,9 @@ class Invoice(metaclass=PoolMeta):
                 for invoice in invoices:
                     to_write.extend((list(invoice.lines), {
                         'party': values['party']}))
-        super(Invoice, cls).write(*args)
         if to_write:
             Line.write(*to_write)
+        super(Invoice, cls).write(*args)
 
     @classmethod
     def get_amount_to_pay(cls, invoices, name):
