@@ -501,7 +501,6 @@ class Payment(Workflow, ModelSQL, ModelView):
             ('invoice.party', '=', self.group.party.id),
             ('invoice.currency', '=', self.group.currency.id),
             ('invoice.state', '=', 'posted'),
-            ('payment_amount', '=', self.amount),
             ]
 
     def _get_invoice_line(self, skip_ids=None):
@@ -512,7 +511,12 @@ class Payment(Workflow, ModelSQL, ModelView):
             skip_ids = set()
         domain = self._invoice_line_search_domain()
         domain.append(('id', 'not in', skip_ids))
-        lines = InvoiceLine.search(domain)
+        lines = []
+        for line in InvoiceLine.search(domain):
+            if line.payment_amount == self.amount:
+                lines.append(line)
+                if len(lines) > 1:
+                    break
         if len(lines) == 1:
             return lines[0]
 
