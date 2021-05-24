@@ -190,7 +190,7 @@ class InvoiceLine(metaclass=PoolMeta):
             ).join(payment, type_='LEFT',
             condition=((table.id == payment.line) & (payment.state == 'done'))
             ).select(table.id,
-                group_by=(table.id, invoice.type),
+                group_by=(table.id,),
                 having=Operator(main_amount, value)
                 )
         return [('id', 'in', query)]
