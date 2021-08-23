@@ -9,6 +9,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Bool, Eval
 from trytond.tools import grouped_slice, reduce_ids
 from trytond.transaction import Transaction
+from trytond.modules.currency.fields import Monetary
 
 __all__ = ['Invoice', 'InvoiceLine']
 
@@ -65,9 +66,8 @@ class Invoice(metaclass=PoolMeta):
 class InvoiceLine(metaclass=PoolMeta):
     __name__ = 'account.invoice.line'
 
-    payment_amount = fields.Function(fields.Numeric('Payment Amount',
-            digits=(16, Eval('currency_digits', 2)),
-            depends=['currency_digits']), 'get_payment_amount',
+    payment_amount = fields.Function(Monetary('Payment Amount',
+        currency='currency', digits='currency'), 'get_payment_amount',
         searcher='search_payment_amount')
     payments = fields.One2Many('account.invoice.line.payment', 'line',
         'Payments', readonly=True)

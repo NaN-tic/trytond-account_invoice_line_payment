@@ -30,10 +30,6 @@ msgctxt "field:account.invoice.line.payment,create_uid:"
 msgid "Create User"
 msgstr "Usuario de creación"
 
-msgctxt "field:account.invoice.line.payment,currency_digits:"
-msgid "Currency Digits"
-msgstr "Decimales de la moneda"
-
 msgctxt "field:account.invoice.line.payment,date:"
 msgid "Date"
 msgstr "Fecha"
@@ -102,10 +98,6 @@ msgctxt "field:account.invoice.line.payment.group,currency:"
 msgid "Currency"
 msgstr "Moneda"
 
-msgctxt "field:account.invoice.line.payment.group,currency_digits:"
-msgid "Currency Digits"
-msgstr "Decimales de la moneda"
-
 msgctxt "field:account.invoice.line.payment.group,id:"
 msgid "ID"
 msgstr "ID"
@@ -165,10 +157,6 @@ msgstr "ID"
 msgctxt "field:account.invoice.line.payment.write-off.start,amount:"
 msgid "Amount"
 msgstr "Importe"
-
-msgctxt "field:account.invoice.line.payment.write-off.start,currency_digits:"
-msgid "Currency Digits"
-msgstr "Decimales de la moneda"
 
 msgctxt "field:account.invoice.line.payment.write-off.start,date:"
 msgid "Date"

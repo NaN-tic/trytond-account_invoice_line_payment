@@ -14,6 +14,7 @@ from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateTransition, Button
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
+from trytond.modules.currency.fields import Monetary
 
 __all__ = ['Move', 'Group', 'Payment', 'ImportPaymentsStart', 'ImportPayments',
     'CreateWriteOffMoveStart', 'CreateWriteOffMove']
@@ -55,8 +56,6 @@ class Group(Workflow, ModelSQL, ModelView):
     currency = fields.Function(fields.Many2One('currency.currency',
             'Currency'),
         'on_change_with_currency')
-    currency_digits = fields.Function(fields.Integer('Currency Digits'),
-        'on_change_with_currency_digits')
     kind = fields.Selection(KINDS, 'Kind', required=True, states=_STATES,
         depends=_DEPENDS)
     payments = fields.One2Many('account.invoice.line.payment', 'group',
@@ -72,9 +71,8 @@ class Group(Workflow, ModelSQL, ModelView):
             ],
         states=_STATES, depends=_DEPENDS + ['party', 'kind'],
         ondelete='RESTRICT')
-    move_line_amount = fields.Function(fields.Numeric('Move Line Amount',
-            digits=(16, Eval('currency_digits', 2)),
-            depends=['currency_digits']),
+    move_line_amount = fields.Function(Monetary('Move Line Amount',
+            currency='currency', digits='currency'),
         'on_change_with_move_line_amount', searcher='search_move_line_amount')
     state = fields.Selection([
             ('draft', 'Draft'),
@@ -138,12 +136,6 @@ class Group(Workflow, ModelSQL, ModelView):
     def on_change_with_currency(self, name=None):
         if self.company:
             return self.company.currency.id
-
-    @fields.depends('currency')
-    def on_change_with_currency_digits(self, name=None):
-        if self.currency:
-            return self.currency.digits
-        return 2
 
     @fields.depends('move_line')
     def on_change_with_move_line_amount(self, name=None):
@@ -266,14 +258,11 @@ class Payment(Workflow, ModelSQL, ModelView):
         'on_change_with_party', searcher='search_group_field')
     kind = fields.Function(fields.Selection(KINDS, 'Kind'),
         'on_change_with_kind', searcher='search_group_field')
-    currency_digits = fields.Function(fields.Integer('Currency Digits'),
-        'on_change_with_currency_digits')
     currency = fields.Function(fields.Many2One('currency.currency',
         'Currency'), 'on_change_with_currency', searcher='search_group_field')
     date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
-    amount = fields.Numeric('Amount', required=True,
-        digits=(16, Eval('currency_digits', 2)), states=_STATES,
-        depends=_DEPENDS + ['currency_digits'])
+    amount = Monetary('Amount', currency='currency', digits='currency',
+        required=True, states=_STATES, depends=_DEPENDS)
     line = fields.Many2One('account.invoice.line', 'Line', ondelete='RESTRICT',
         domain=[
             ('type', '=', 'line'),
@@ -303,10 +292,8 @@ class Payment(Workflow, ModelSQL, ModelView):
     description = fields.Char('Description', states=_STATES, depends=_DEPENDS)
     group = fields.Many2One('account.invoice.line.payment.group', 'Group',
         readonly=True, required=True, ondelete='CASCADE')
-    difference = fields.Function(fields.Numeric('Difference',
-            digits=(16, Eval('currency_digits', 2)),
-            depends=['currency_digits']),
-        'on_change_with_difference')
+    difference = fields.Function(Monetary('Difference',
+        currency='currency', digits='currency'), 'on_change_with_difference')
     difference_move = fields.Many2One('account.move', 'Diference Move',
         readonly=True,
         states={
@@ -372,12 +359,11 @@ class Payment(Workflow, ModelSQL, ModelView):
     def on_change_with_currency(self, name=None):
         return self.group and self.group.currency and self.group.currency.id
 
-    @fields.depends('line', '_parent_line.amount', 'amount',
-        methods=['on_change_with_currency_digits'])
+    @fields.depends('line', '_parent_line.amount', 'amount', 'currency')
     def on_change_with_difference(self, name=None):
         if not self.line or not self.amount:
             return Decimal(0)
-        digits = self.on_change_with_currency_digits()
+        digits = self.currency and self.currency.digits or 2
         amount = (self.line.amount + self.line.tax_amount) - self.amount
         return amount.quantize(Decimal(str(10 ** -digits)))
 
@@ -389,12 +375,6 @@ class Payment(Workflow, ModelSQL, ModelView):
     @classmethod
     def search_group_field(cls, name, clause):
         return [('group.%s' % clause[0],) + tuple(clause[1:])]
-
-    @fields.depends('group', '_parent_group.currency')
-    def on_change_with_currency_digits(self, name=None):
-        if self.group and self.group.currency:
-            return self.group.currency.digits
-        return 2
 
     @classmethod
     def process_invoices(cls, payments):
@@ -605,9 +585,9 @@ class CreateWriteOffMoveStart(ModelView):
             ('type', '=', 'write-off'),
             ])
     date = fields.Date('Date', required=True)
-    amount = fields.Numeric('Amount', digits=(16, Eval('currency_digits', 2)),
-        readonly=True, depends=['currency_digits'])
-    currency_digits = fields.Integer('Currency Digits', readonly=True)
+    amount = Monetary('Amount', digits='currency', currency='currency',
+        readonly=True)
+    currency = fields.Many2One('currency.currency', 'Currency', readonly=True)
     description = fields.Char('Description')
 
 
@@ -626,6 +606,7 @@ class CreateWriteOffMove(Wizard):
         return {
             'date': payment.date,
             'amount': payment.difference,
+            'currency': payment.currency,
             }
 
     def get_payment(self):
