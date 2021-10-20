@@ -601,9 +601,7 @@ class CreateWriteOffMoveStart(ModelView):
     'Create Write-Off Move'
     __name__ = 'account.invoice.line.payment.write-off.start'
     writeoff = fields.Many2One('account.move.reconcile.write_off', 'Journal',
-        required=True, domain=[
-            ('type', '=', 'write-off'),
-            ])
+        required=True)
     date = fields.Date('Date', required=True)
     amount = fields.Numeric('Amount', digits=(16, Eval('currency_digits', 2)),
         readonly=True, depends=['currency_digits'])
