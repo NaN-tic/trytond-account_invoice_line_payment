@@ -253,6 +253,12 @@ msgctxt ""
 msgid "Draft"
 msgstr "Borrador"
 
+msgctxt "model:ir.message,text:csv_error"
+msgid "Error loading file. Please, make sure the file is in a valid CSV format."
+msgstr ""
+"Error importando el fichero. Por favor, asegurese de que el fichero tiene un "
+"formato CSV válido."
+
 msgctxt "model:ir.message,text:delete_draft"
 msgid "Payment \"%(payment)s\" must be in draft state before deletion."
 msgstr "El pago \"%(payment)s\" debe estar en estado borrador antes de borrarlo."

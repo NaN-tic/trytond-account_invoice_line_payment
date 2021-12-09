@@ -253,6 +253,12 @@ msgctxt ""
 msgid "Draft"
 msgstr "Esborrany"
 
+msgctxt "model:ir.message,text:csv_error"
+msgid "Error loading file. Please, make sure the file is in a valid CSV format."
+msgstr ""
+"Error important el fitxer. Si us plau, assegureu-vos que el fitxer té un "
+"format CSV vàlid."
+
 msgctxt "model:ir.message,text:delete_draft"
 msgid "Payment \"%(payment)s\" must be in draft state before deletion."
 msgstr ""
