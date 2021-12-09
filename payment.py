@@ -563,8 +563,11 @@ class ImportPayments(Wizard):
         Group = pool.get('account.invoice.line.payment.group')
         group = Group(Transaction().context['active_id'])
         dialect = csv.Sniffer().sniff(str(self.start.data[:1024]))
-        reader = csv.reader(StringIO(self.start.data.decode('utf8')),
-            dialect=dialect)
+        try:
+            reader = csv.reader(StringIO(self.start.data.decode('utf8')),
+                dialect=dialect)
+        except UnicodeDecodeError:
+            raise UserError(gettext('account_invoice_line_payment.csv_error'))
         next(reader)  # Skip header line
         payments = []
         for row in reader:
