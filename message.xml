@@ -15,5 +15,8 @@ this repository contains the full copyright notices and license terms. -->
       <record model="ir.message" id="different_amount">
           <field name="text">Payment "%(payment)s" can not be mark as done as it has a difference of "%(difference)s" between it amount and its line amount.</field>
       </record>
+      <record model="ir.message" id="csv_error">
+          <field name="text">Error loading file. Please, make sure the file is in a valid CSV format.</field>
+      </record>
     </data>
 </tryton>
