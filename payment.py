@@ -549,7 +549,10 @@ class ImportPayments(Wizard):
     def get_payment(self, row):
         pool = Pool()
         Payment = pool.get('account.invoice.line.payment')
-        date, amount, description = row
+        try:
+            date, amount, description = row
+        except ValueError as e:
+            raise UserError(str(e))
         payment = Payment()
         date_args = list(map(int, date.split('/')))
         date_args.reverse()
