@@ -46,7 +46,10 @@ class Group(Workflow, ModelSQL, ModelView):
     reference = fields.Char('Reference', required=True, states=_STATES,
         depends=_DEPENDS)
     party = fields.Many2One('party.party', 'Party', required=True,
-        states=_STATES, depends=_DEPENDS)
+        context={
+            'company': Eval('company', -1),
+            },
+        states=_STATES, depends=_DEPENDS + ['company'])
     company = fields.Many2One('company.company', 'Company', required=True,
         select=True, states=_STATES, depends=_DEPENDS,
         domain=[
@@ -254,7 +257,11 @@ class Payment(Workflow, ModelSQL, ModelView):
     __name__ = 'account.invoice.line.payment'
     company = fields.Function(fields.Many2One('company.company', 'Company'),
         'on_change_with_company', searcher='search_group_field')
-    party = fields.Function(fields.Many2One('party.party', 'Party'),
+    party = fields.Function(fields.Many2One('party.party', "Party",
+        context={
+            'company': Eval('company', -1),
+            },
+        depends=['company']),
         'on_change_with_party', searcher='search_group_field')
     kind = fields.Function(fields.Selection(KINDS, 'Kind'),
         'on_change_with_kind', searcher='search_group_field')
