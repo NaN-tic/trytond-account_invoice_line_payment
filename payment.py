@@ -51,7 +51,7 @@ class Group(Workflow, ModelSQL, ModelView):
             },
         states=_STATES, depends=_DEPENDS + ['company'])
     company = fields.Many2One('company.company', 'Company', required=True,
-        select=True, states=_STATES, depends=_DEPENDS,
+        states=_STATES, depends=_DEPENDS,
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
@@ -309,7 +309,7 @@ class Payment(Workflow, ModelSQL, ModelView):
     state = fields.Selection([
             ('draft', 'Draft'),
             ('done', 'Done'),
-            ], 'State', readonly=True, select=True)
+            ], 'State', readonly=True)
 
     @classmethod
     def __setup__(cls):
