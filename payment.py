@@ -4,6 +4,7 @@ from io import StringIO
 import csv
 import datetime
 from decimal import Decimal
+from decimal import InvalidOperation
 from itertools import chain
 from sql.functions import Abs
 
@@ -563,9 +564,16 @@ class ImportPayments(Wizard):
         payment = Payment()
         date_args = list(map(int, date.split('/')))
         date_args.reverse()
-        payment.date = datetime.date(*date_args)
-        payment.amount = Decimal(str(amount.replace(',', '.')))
+        try:
+            payment.date = datetime.date(*date_args)
+        except TypeError as e:
+            raise UserError(str(e))
+        try:
+            payment.amount = Decimal(str(amount.replace(',', '.')))
+        except InvalidOperation as e:
+            raise UserError(str(e))
         payment.description = description
+
         return payment
 
     def transition_import_(self):
