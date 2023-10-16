@@ -568,6 +568,8 @@ class ImportPayments(Wizard):
             payment.date = datetime.date(*date_args)
         except TypeError as e:
             raise UserError(str(e))
+        except ValueError as e:
+            raise UserError(str(e))
         try:
             payment.amount = Decimal(str(amount.replace(',', '.')))
         except InvalidOperation as e:
