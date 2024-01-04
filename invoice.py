@@ -76,6 +76,7 @@ class InvoiceLine(metaclass=PoolMeta):
     def create(cls, vlist):
         Invoice = Pool().get('account.invoice')
 
+        vlist = [x.copy() for x in vlist]
         invoices = dict((x.id, x) for x in Invoice.browse(list(
             set([vals['invoice'] for vals in vlist if vals.get('invoice')]))))
         for vals in vlist:
