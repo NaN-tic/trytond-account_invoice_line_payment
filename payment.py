@@ -27,7 +27,6 @@ KINDS = [
 _STATES = {
     'readonly': Eval('state') != 'draft',
     }
-_DEPENDS = ['state']
 _ZERO = Decimal('0.0')
 
 
@@ -44,15 +43,14 @@ class Group(Workflow, ModelSQL, ModelView):
     'Invoice Line Payment Group'
     __name__ = 'account.invoice.line.payment.group'
     _rec_name = 'reference'
-    reference = fields.Char('Reference', required=True, states=_STATES,
-        depends=_DEPENDS)
+    reference = fields.Char('Reference', required=True, states=_STATES)
     party = fields.Many2One('party.party', 'Party', required=True,
         context={
             'company': Eval('company', -1),
             },
-        states=_STATES, depends=_DEPENDS + ['company'])
+        states=_STATES)
     company = fields.Many2One('company.company', 'Company', required=True,
-        states=_STATES, depends=_DEPENDS,
+        states=_STATES,
         domain=[
             ('id', If(Eval('context', {}).contains('company'), '=', '!='),
                 Eval('context', {}).get('company', -1)),
@@ -60,10 +58,9 @@ class Group(Workflow, ModelSQL, ModelView):
     currency = fields.Function(fields.Many2One('currency.currency',
             'Currency'),
         'on_change_with_currency')
-    kind = fields.Selection(KINDS, 'Kind', required=True, states=_STATES,
-        depends=_DEPENDS)
+    kind = fields.Selection(KINDS, 'Kind', required=True, states=_STATES)
     payments = fields.One2Many('account.invoice.line.payment', 'group',
-        'Payments', states=_STATES, depends=_DEPENDS)
+        'Payments', states=_STATES)
     move_line = fields.Many2One('account.move.line', 'Move Line',
         required=True,
         domain=[
@@ -73,8 +70,7 @@ class Group(Workflow, ModelSQL, ModelView):
                 ('debit', '>', 0)
                 )
             ],
-        states=_STATES, depends=_DEPENDS + ['party', 'kind'],
-        ondelete='RESTRICT')
+        states=_STATES, ondelete='RESTRICT')
     move_line_amount = fields.Function(Monetary('Move Line Amount',
             currency='currency', digits='currency'),
         'on_change_with_move_line_amount', searcher='search_move_line_amount')
@@ -268,9 +264,9 @@ class Payment(Workflow, ModelSQL, ModelView):
         'on_change_with_kind', searcher='search_group_field')
     currency = fields.Function(fields.Many2One('currency.currency',
         'Currency'), 'on_change_with_currency', searcher='search_group_field')
-    date = fields.Date('Date', required=True, states=_STATES, depends=_DEPENDS)
+    date = fields.Date('Date', required=True, states=_STATES)
     amount = Monetary('Amount', currency='currency', digits='currency',
-        required=True, states=_STATES, depends=_DEPENDS)
+        required=True, states=_STATES)
     line = fields.Many2One('account.invoice.line', 'Line', ondelete='RESTRICT',
         domain=[
             ('type', '=', 'line'),
@@ -295,9 +291,8 @@ class Payment(Workflow, ModelSQL, ModelView):
         states={
             'readonly': Eval('state') != 'draft',
             'required': Eval('state') == 'done',
-            },
-        depends=['state', 'group', 'kind', 'party', 'currency'])
-    description = fields.Char('Description', states=_STATES, depends=_DEPENDS)
+            })
+    description = fields.Char('Description', states=_STATES)
     group = fields.Many2One('account.invoice.line.payment.group', 'Group',
         readonly=True, required=True, ondelete='CASCADE')
     difference = fields.Function(Monetary('Difference',
