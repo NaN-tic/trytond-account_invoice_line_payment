@@ -562,8 +562,14 @@ class ImportPayments(Wizard):
         except ValueError as e:
             raise UserError(str(e))
         payment = Payment()
-        date_args = list(map(int, date.split('/')))
+
+        try:
+            date_args = list(map(int, date.split('/')))
+        except ValueError as e:
+            raise UserError(str(e))
+
         date_args.reverse()
+
         try:
             payment.date = datetime.date(*date_args)
         except TypeError as e:
