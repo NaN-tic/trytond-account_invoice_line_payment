@@ -24,17 +24,15 @@
             <field name="name">invoice_line_list</field>
         </record>
 
-        <record model="ir.model.field.access"
-                id="model_field_access_payments_amount">
-            <field name="field"
-                search="[('model.model', '=', 'account.invoice.line'), ('name', '=', 'payment_amount')]"/>
+        <record model="ir.model.field.access" id="model_field_access_payments_amount">
+            <field name="model">account.invoice.line</field>
+            <field name="field">payment_amount</field>
             <field name="perm_read" eval="False"/>
             <field name="perm_write" eval="False"/>
         </record>
-        <record model="ir.model.field.access"
-                id="model_field_access_payments_amount_group_payments">
-            <field name="field"
-                search="[('model.model', '=', 'account.invoice.line'), ('name', '=', 'payment_amount')]"/>
+        <record model="ir.model.field.access" id="model_field_access_payments_amount_group_payments">
+            <field name="model">account.invoice.line</field>
+            <field name="field">payment_amount</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
         </record>

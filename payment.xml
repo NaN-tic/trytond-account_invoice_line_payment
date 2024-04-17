@@ -47,17 +47,14 @@
             <field name="act_window" ref="act_payment"/>
         </record>
         <record model="ir.model.access" id="access_account_invoice_line_payment">
-            <field name="model"
-                search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
             <field name="perm_read" eval="False"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
-        <record model="ir.model.access"
-                id="access_account_invoice_line_payment_admin">
-            <field name="model"
-                search="[('model', '=', 'account.invoice.line.payment')]"/>
+        <record model="ir.model.access" id="access_account_invoice_line_payment_admin">
+            <field name="model">account.invoice.line.payment</field>
             <field name="group" ref="group_account_invoice_line_payment"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -68,25 +65,25 @@
         <record model="ir.model.button" id="account_invoice_line_payment_draft_button">
             <field name="name">draft</field>
             <field name="string">Draft</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_done_button">
             <field name="name">done</field>
             <field name="string">Done</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_search_line_button">
             <field name="name">search_line</field>
             <field name="string">Search Invoice Line</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_create_writeoff_button">
             <field name="name">create_writeoff</field>
             <field name="string">Create WriteOff Move</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
         </record>
 
         <record model="ir.ui.view"
@@ -139,19 +136,15 @@
             <field name="sequence" eval="99999"/>
             <field name="act_window" ref="act_payment_group"/>
         </record>
-        <record model="ir.model.access"
-                id="access_account_invoice_line_payment_group">
-            <field name="model"
-                search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+        <record model="ir.model.access" id="access_account_invoice_line_payment_group">
+            <field name="model">account.invoice.line.payment.group</field>
             <field name="perm_read" eval="False"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_delete" eval="False"/>
         </record>
-        <record model="ir.model.access"
-                id="access_account_invoice_line_payment_group_admin">
-            <field name="model"
-                search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+        <record model="ir.model.access" id="access_account_invoice_line_payment_group_admin">
+            <field name="model">account.invoice.line.payment.group</field>
             <field name="group" ref="group_account_invoice_line_payment"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -162,30 +155,30 @@
         <record model="ir.model.button" id="account_invoice_line_payment_group_draft_button">
             <field name="name">draft</field>
             <field name="string">Draft</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+            <field name="model">account.invoice.line.payment.group</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_group_confirm_button">
             <field name="name">confirm</field>
             <field name="string">Confirm</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+            <field name="model">account.invoice.line.payment.group</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_group_search_lines_button">
             <field name="name">search_lines</field>
             <field name="string">Search Invoice Lines</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+            <field name="model">account.invoice.line.payment.group</field>
         </record>
 
         <record model="ir.model.button" id="account_invoice_line_payment_group_import_payments_button">
             <field name="name">import_payments</field>
             <field name="string">Import Payments</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+            <field name="model">account.invoice.line.payment.group</field>
         </record>
 
           <record model="ir.rule.group" id="rule_group_account_invoice_line_payment">
             <field name="name">Invoice line payment</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment')]"/>
+            <field name="model">account.invoice.line.payment</field>
             <field name="global_p" eval="True"/>
           </record>
 
@@ -198,7 +191,7 @@
 
           <record model="ir.rule.group" id="rule_group_account_invoice_line_payment_group">
             <field name="name">Invoice line payment group</field>
-            <field name="model" search="[('model', '=', 'account.invoice.line.payment.group')]"/>
+            <field name="model">account.invoice.line.payment.group</field>
             <field name="global_p" eval="True"/>
           </record>
 
