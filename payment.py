@@ -27,7 +27,7 @@ KINDS = [
 _STATES = {
     'readonly': Eval('state') != 'draft',
     }
-_ZERO = Decimal('0.0')
+_ZERO = Decimal(0)
 
 
 class Move(metaclass=PoolMeta):

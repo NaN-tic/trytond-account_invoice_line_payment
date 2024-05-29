@@ -54,7 +54,7 @@ class Invoice(metaclass=PoolMeta):
 
     def get_reconciled(self, name):
         lines_to_pay = [l for l in self.lines if l.type == 'line' and
-            l.amount != Decimal('0.0')]
+            l.amount != Decimal(0)]
         if (lines_to_pay and all(l.paid for l in lines_to_pay)):
             return max(p.date for l in lines_to_pay for p in l.payments)
         return super(Invoice, self).get_reconciled(name)
