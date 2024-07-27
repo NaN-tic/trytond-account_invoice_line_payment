@@ -628,7 +628,7 @@ class CreateWriteOffMove(Wizard):
         return {
             'date': payment.date,
             'amount': payment.difference,
-            'currency': payment.currency,
+            'currency': payment.currency.id if payment.currency else None,
             }
 
     def get_payment(self):
