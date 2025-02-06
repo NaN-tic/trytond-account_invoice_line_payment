@@ -56,8 +56,7 @@ class Group(Workflow, ModelSQL, ModelView):
                 Eval('context', {}).get('company', -1)),
             ])
     currency = fields.Function(fields.Many2One('currency.currency',
-            'Currency'),
-        'on_change_with_currency')
+        'Currency'), 'on_change_with_currency')
     kind = fields.Selection(KINDS, 'Kind', required=True, states=_STATES)
     payments = fields.One2Many('account.invoice.line.payment', 'group',
         'Payments', states=_STATES)
@@ -263,7 +262,7 @@ class Payment(Workflow, ModelSQL, ModelView):
     kind = fields.Function(fields.Selection(KINDS, 'Kind'),
         'on_change_with_kind', searcher='search_group_field')
     currency = fields.Function(fields.Many2One('currency.currency',
-        'Currency'), 'on_change_with_currency', searcher='search_group_field')
+        'Currency'), 'on_change_with_currency')
     date = fields.Date('Date', required=True, states=_STATES)
     amount = Monetary('Amount', currency='currency', digits='currency',
         required=True, states=_STATES)
