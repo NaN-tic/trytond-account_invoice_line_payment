@@ -262,7 +262,7 @@ msgstr ""
 msgctxt "model:ir.message,text:done_needs_line"
 msgid "Payment \"%(payment)s\" must have an invoice line before it can be done."
 msgstr ""
-"El pago \"%(payments)s\" debe tener una línea de factura antes de que se "
+"El pago \"%(payment)s\" debe tener una línea de factura antes de que se "
 "pueda finalizar."
 
 msgctxt "model:ir.message,text:invalid_amounts"
