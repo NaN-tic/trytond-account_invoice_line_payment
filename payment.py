@@ -371,7 +371,7 @@ class Payment(Workflow, ModelSQL, ModelView):
 
     @fields.depends('group', '_parent_group.company')
     def on_change_with_company(self, name=None):
-        if self.group:
+        if self.group and self.group.company:
             return self.group.company.id
 
     @classmethod
