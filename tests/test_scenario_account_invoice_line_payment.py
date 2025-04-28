@@ -251,11 +251,7 @@ class Test(unittest.TestCase):
         first_payment.line = first_line
         group.click('confirm')
         first_payment, = group.payments
-        sequence_journal, = Sequence.find([('sequence_type.name', '=',
-                                            'Account Journal')])
-        journal_writeoff = Journal(name='Write-Off',
-                                   type='write-off',
-                                   sequence=sequence_journal)
+        journal_writeoff = Journal(name='Write-Off', type='write-off')
         journal_writeoff.save()
         WriteOff = Model.get('account.move.reconcile.write_off')
         writeoff_method = WriteOff()
