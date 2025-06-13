@@ -102,9 +102,7 @@ class InvoiceLine(metaclass=PoolMeta):
         tax_amount = Decimal(0)
         if self.type != 'line':
             return tax_amount
-        for tax in self._get_taxes().values():
-            tax_amount += tax['amount']
-        return tax_amount
+        return sum((v.amount for v in self._get_taxes().values()), Decimal(0))
 
     @classmethod
     def _compute_payment_amount_query(cls):
