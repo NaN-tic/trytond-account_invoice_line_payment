@@ -574,7 +574,7 @@ class ImportPayments(Wizard):
             payment.amount = Decimal(str(amount.replace(',', '.')))
         except InvalidOperation as e:
             raise UserError(str(e))
-        payment.reference = description
+        payment.description = description
 
         return payment
 
