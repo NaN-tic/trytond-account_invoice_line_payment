@@ -87,7 +87,7 @@ class Test(unittest.TestCase):
 
         # Create invoice
         Invoice = Model.get('account.invoice')
-        invoice = Invoice()
+        invoice = Invoice(type='out')
         invoice.party = customer
         invoice.payment_term = payment_term
         line = invoice.lines.new()
@@ -204,7 +204,7 @@ class Test(unittest.TestCase):
         self.assertEqual(invoice.state, 'paid')
 
         # Create invoice to be partialy reconciled
-        invoice = Invoice()
+        invoice = Invoice(type='out')
         invoice.party = customer
         invoice.payment_term = payment_term
         line = invoice.lines.new()
@@ -274,7 +274,7 @@ class Test(unittest.TestCase):
         self.assertEqual(invoice.state, 'paid')
 
         # Upgrade party lines when create or write an invoice
-        invoice = Invoice()
+        invoice = Invoice(type='out')
         invoice.party = customer
         invoice.payment_term = payment_term
         line = invoice.lines.new()
