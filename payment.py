@@ -293,7 +293,9 @@ class Payment(Workflow, ModelSQL, ModelView):
             })
     description = fields.Char('Description', states=_STATES)
     group = fields.Many2One('account.invoice.line.payment.group', 'Group',
-        readonly=True, required=True, ondelete='CASCADE')
+        required=True, ondelete='CASCADE', states={
+            'editable': False,
+            })
     difference = fields.Function(Monetary('Difference',
         currency='currency', digits='currency'), 'on_change_with_difference')
     difference_move = fields.Many2One('account.move', 'Diference Move',

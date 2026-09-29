@@ -73,16 +73,15 @@ class InvoiceLine(metaclass=PoolMeta):
         'Payments', readonly=True)
 
     @classmethod
-    def create(cls, vlist):
-        Invoice = Pool().get('account.invoice')
+    def preprocess_values(cls, mode, values):
+        values = super().preprocess_values(mode, values)
+        if mode != 'create' or not values.get('invoice'):
+            return values
 
-        vlist = [x.copy() for x in vlist]
-        invoices = dict((x.id, x) for x in Invoice.browse(list(
-            set([vals['invoice'] for vals in vlist if vals.get('invoice')]))))
-        for vals in vlist:
-            if vals.get('invoice'):
-                vals['party'] = invoices.get(vals['invoice']).party.id
-        return super(InvoiceLine, cls).create(vlist)
+        Invoice = Pool().get('account.invoice')
+        invoice = Invoice(values['invoice'])
+        values['party'] = invoice.party.id
+        return values
 
     @property
     def paid(self):
