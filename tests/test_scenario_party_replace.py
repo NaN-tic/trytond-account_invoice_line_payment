@@ -85,7 +85,6 @@ class Test(unittest.TestCase):
         line.credit = Decimal(440)
         line.party = party
         move.save()
-        move.click('post')
         customer_move, = MoveLine.find([
             ('move', '=', move.id),
             ('account', '=', receivable.id),
@@ -109,3 +108,5 @@ class Test(unittest.TestCase):
         # Check fields have been replaced
         group.reload()
         self.assertEqual(group.party, party2)
+        customer_move.reload()
+        self.assertEqual(customer_move.party, party2)
