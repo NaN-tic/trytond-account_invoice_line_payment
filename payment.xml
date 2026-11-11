@@ -272,4 +272,14 @@
         </record>
 
     </data>
+    <data>
+        <record model="ir.action-res.group" id="import_payments_group_invoice_line_payment">
+            <field name="action" ref="wizard_import_payments"/>
+            <field name="group" ref="group_account_invoice_line_payment"/>
+        </record>
+        <record model="ir.action-res.group" id="writeoff_group_invoice_line_payment">
+            <field name="action" ref="wizard_writeoff"/>
+            <field name="group" ref="group_account_invoice_line_payment"/>
+        </record>
+    </data>
 </tryton>
